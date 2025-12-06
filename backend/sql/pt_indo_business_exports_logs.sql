@@ -1,0 +1,53 @@
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+--
+-- Host: localhost    Database: pt_indo_business_exports
+-- ------------------------------------------------------
+-- Server version	9.3.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `topic` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs`
+--
+
+LOCK TABLES `logs` WRITE;
+/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+INSERT INTO `logs` VALUES (1,'login','User ptindo_admin logged in at 2025-12-01T19:47:49.381Z','2025-12-01 19:47:49'),(2,'login','User ptindo_admin logged in at 2025-12-01T19:50:24.539Z','2025-12-01 19:50:24'),(3,'login','User ptindo_admin logged in at 2025-12-01T19:50:45.413Z','2025-12-01 19:50:45'),(4,'login','User ptindo_admin logged in at 2025-12-01T19:51:46.819Z','2025-12-01 19:51:46'),(5,'login','User ptindo_admin logged in at 2025-12-01T19:52:13.292Z','2025-12-01 19:52:13'),(6,'login','User ptindo_admin logged in at 2025-12-01T19:52:53.556Z','2025-12-01 19:52:53'),(7,'login','User ptindo_admin logged in at 2025-12-01T19:53:05.503Z','2025-12-01 19:53:05'),(8,'login','User ptindo_admin logged in at 2025-12-01T19:53:31.364Z','2025-12-01 19:53:31'),(9,'login','User ptindo_admin logged in at 2025-12-01T19:53:43.396Z','2025-12-01 19:53:43'),(10,'login','User ptindo_admin logged in at 2025-12-01T19:53:57.339Z','2025-12-01 19:53:57'),(11,'login','User ptindo_admin logged in at 2025-12-01T19:54:24.865Z','2025-12-01 19:54:24'),(12,'login','User ptindo_admin logged in at 2025-12-01T19:54:43.108Z','2025-12-01 19:54:43'),(13,'login','User ptindo_admin logged in at 2025-12-01T19:55:12.777Z','2025-12-01 19:55:12'),(14,'login','User ptindo_admin logged in at 2025-12-01T19:58:33.940Z','2025-12-01 19:58:33'),(15,'login','User ptindo_admin logged in at 2025-12-01T20:12:05.362Z','2025-12-01 20:12:05'),(16,'logout','User ptindo_admin123 logged out at 2025-12-01T20:38:45.888Z','2025-12-01 20:38:45'),(17,'login','User ptindo_admin logged in at 2025-12-01T20:39:11.540Z','2025-12-01 20:39:11'),(18,'Edit Jumbotron','User ptindo_admin123 Edit Jumbotron at 2025-12-01T22:10:41.646Z','2025-12-01 22:10:41'),(19,'Edit Jumbotron','User ptindo_admin123 Edit Jumbotron at 2025-12-01T22:15:08.766Z','2025-12-01 22:15:08'),(20,'login','User ptindo_admin logged in at 2025-12-02T13:06:34.808Z','2025-12-02 13:06:34'),(21,'Edit Tabs','Fields have been changed','2025-12-02 15:33:55'),(22,'Edit Tabs','Fields have been changed','2025-12-02 15:35:43'),(23,'Edit Tabs','Fields have been changed','2025-12-02 15:36:31'),(24,'Edit Tabs','Fields have been changed','2025-12-02 15:36:37'),(25,'Edit Tabs','Fields have been changed','2025-12-02 15:36:46'),(26,'login','User ptindo_admin logged in at 2025-12-03T06:01:50.272Z','2025-12-03 06:01:50'),(27,'login','User ptindo_admin logged in at 2025-12-03T13:10:08.838Z','2025-12-03 13:10:08'),(28,'Delete Certificate','Fields or files/images have been changed','2025-12-03 13:33:22'),(29,'Update Certificate','Fields or files/images have been changed','2025-12-03 13:40:57'),(30,'products','Deleted product: Cinnamon Sticks','2025-12-03 17:31:49'),(31,'Edit product','Updated product: Black Peppers','2025-12-03 17:34:55'),(32,'Edit product','Updated product: Black Peppers','2025-12-03 17:35:44'),(33,'Edit product','Updated product: Black Peppers','2025-12-03 17:36:15'),(34,'Delete product','Deleted product: White Pepper','2025-12-03 17:43:20'),(35,'Edit product','Updated product: Black Peppers','2025-12-03 18:13:28'),(36,'Edit product','Updated product: Black Peppers','2025-12-03 18:14:20'),(37,'Delete product','Deleted product: Star Anise','2025-12-03 18:19:30'),(38,'Delete product','Deleted product: Turmeric Finger','2025-12-03 18:19:32'),(39,'Delete product','Deleted product: Red Chilli (Teja)','2025-12-03 18:19:41'),(40,'Delete product','Deleted product: Bay Leaf','2025-12-03 18:19:44'),(41,'Delete product','Deleted product: Cloves','2025-12-03 18:20:27'),(42,'Add product','Created product: test','2025-12-03 18:23:32'),(43,'Edit product','Updated product: test','2025-12-03 18:24:05'),(44,'logout','User ptindo_admin123 logged out at 2025-12-03T18:24:36.888Z','2025-12-03 18:24:36'),(45,'login','User ptindo_admin logged in at 2025-12-03T18:40:43.626Z','2025-12-03 18:40:43'),(46,'Delete product','Deleted product: test','2025-12-04 17:05:53'),(47,'Add product','Created product: Clove','2025-12-04 17:30:28'),(48,'Add product','Created product: CLOVE STEM','2025-12-04 17:33:09'),(49,'Edit product','Updated product: CLOVE','2025-12-04 17:33:39'),(50,'Add product','Created product: CUBEB','2025-12-04 17:35:25'),(51,'Edit product','Updated product: CLOVE','2025-12-04 17:35:36'),(52,'Edit product','Updated product: CLOVE','2025-12-04 17:35:45'),(53,'Edit product','Updated product: CLOVE STEM','2025-12-04 17:35:51'),(54,'Add product','Created product: MACE','2025-12-04 17:37:32'),(55,'Add product','Created product: LONG PEPPER','2025-12-04 17:39:07'),(56,'Edit product','Updated product: LONG PEPPER','2025-12-04 17:39:39'),(57,'Add product','Created product: CASSIA VERA (CASSIA / CINNAMON BARK)','2025-12-04 17:43:06'),(58,'login','User ptindo_admin logged in at 2025-12-05T07:53:52.314Z','2025-12-05 07:53:52'),(59,'Add product','Created product: COCOA POWDER','2025-12-05 07:58:29'),(60,'Update Certificate','Fields or files/images have been changed','2025-12-05 14:49:59'),(61,'Update Certificate','Fields or files/images have been changed','2025-12-05 14:50:44'),(62,'Update Certificate','Fields or files/images have been changed','2025-12-05 14:52:20'),(63,'Add Certificate','Fields or Files/images have been changed','2025-12-05 14:53:21'),(64,'Add Certificate','Fields or Files/images have been changed','2025-12-05 14:54:59'),(65,'Update Certificate','Fields or files/images have been changed','2025-12-05 14:58:51'),(66,'Add Certificate','Fields or Files/images have been changed','2025-12-05 15:03:22'),(67,'Update Certificate','Fields or files/images have been changed','2025-12-05 15:03:47'),(68,'login','User ptindo_admin logged in at 2025-12-06T08:03:23.056Z','2025-12-06 08:03:23'),(69,'Add product','Created product: Coconut Sugar','2025-12-06 08:11:32'),(70,'Add product','Created product: Black Pepper','2025-12-06 08:15:30'),(71,'Add product','Created product: White Pepper','2025-12-06 08:17:21'),(72,'Add product','Created product: Curcuma (Turmeric)','2025-12-06 08:20:24'),(73,'Add product','Created product: Tamarind','2025-12-06 08:21:53'),(74,'Add product','Created product: Velvet Tamarind','2025-12-06 08:23:12'),(75,'Add product','Created product: White Cardamom','2025-12-06 08:24:34'),(76,'Add product','Created product: Rosella','2025-12-06 08:24:50'),(77,'Edit product','Updated product: Rosella','2025-12-06 08:26:18'),(78,'Add product','Created product: Nutmegs','2025-12-06 08:35:52'),(79,'Add product','Created product: Betel nuts','2025-12-06 08:38:29'),(80,'Add product','Created product: Raw cashew nut','2025-12-06 08:40:16'),(81,'Add product','Created product: Cashew kernels','2025-12-06 08:41:28'),(82,'Add product','Created product: Coconut charcoal','2025-12-06 08:45:10'),(83,'Add product','Created product: Dried coconut copra','2025-12-06 08:46:21'),(84,'Add product','Created product: Damar Batu','2025-12-06 08:57:16'),(85,'Add product','Created product: Gambier','2025-12-06 08:58:28'),(86,'Add product','Created product: Gum Benzoin','2025-12-06 09:00:07'),(87,'Add product','Created product: Gum Copal','2025-12-06 09:01:55'),(88,'Add product','Created product: Gum Damar','2025-12-06 09:04:01'),(89,'Add product','Created product: Gum Rosin','2025-12-06 09:05:22'),(90,'Add product','Created product: Sticklac','2025-12-06 09:06:31'),(91,'Add product','Created product: Essential Oil','2025-12-06 09:12:14'),(92,'Edit product','Updated product: CLOVE','2025-12-06 16:16:17'),(93,'Edit product','Updated product: CLOVE','2025-12-06 16:16:43'),(94,'Edit product','Updated product: Cloves','2025-12-06 16:34:41'),(95,'Add Certificate','Fields or Files/images have been changed','2025-12-06 16:41:54'),(96,'Delete Certificate','Fields or files/images have been changed','2025-12-06 16:44:10'),(97,'Add Certificate','Fields or Files/images have been changed','2025-12-06 16:45:04'),(98,'logout','User ptindo_admin123 logged out at 2025-12-06T17:26:00.641Z','2025-12-06 17:26:00'),(99,'login','User ptindo_admin logged in at 2025-12-06T17:39:25.543Z','2025-12-06 17:39:25'),(100,'Delete Certificate','Fields or files/images have been changed','2025-12-06 17:39:31'),(101,'logout','User ptindo_admin123 logged out at 2025-12-06T17:39:54.670Z','2025-12-06 17:39:54'),(102,'login','User ptindo_admin logged in at 2025-12-06T17:53:52.243Z','2025-12-06 17:53:52'),(103,'Edit jumbotron','Fields or images have been changed','2025-12-06 17:55:59'),(104,'Edit jumbotron','Fields or images have been changed','2025-12-06 17:56:20'),(105,'Edit product','Updated product: CLOVES','2025-12-06 17:57:23'),(106,'Add product','Created product: test','2025-12-06 17:58:03'),(107,'Delete product','Deleted product: test','2025-12-06 17:58:38');
+/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-12-06 23:39:18
