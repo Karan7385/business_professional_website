@@ -59,14 +59,6 @@ export default function About() {
                 <p className="mt-1 text-xs text-gray-500">Product SKUs</p>
               </div>
               <div className="rounded-xl border border-red-200 bg-white/70 p-4 text-center">
-                <p className="text-2xl font-semibold text-gray-900">20+</p>
-                <p className="mt-1 text-xs text-gray-500">Global Markets</p>
-              </div>
-              <div className="rounded-xl border border-red-200 bg-white/70 p-4 text-center">
-                <p className="text-2xl font-semibold text-gray-900">500 MT</p>
-                <p className="mt-1 text-xs text-gray-500">Annual Capacity</p>
-              </div>
-              <div className="rounded-xl border border-red-200 bg-white/70 p-4 text-center">
                 <p className="text-2xl font-semibold text-gray-900">100%</p>
                 <p className="mt-1 text-xs text-gray-500">Verified Sourcing</p>
               </div>

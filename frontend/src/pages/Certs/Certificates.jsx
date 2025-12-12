@@ -153,8 +153,6 @@ export function Certificates() {
         `}
       </style>
 
-      <Navbar />
-
       <main className="min-h-screen bg-linear-to-br from-orange-50 via-slate-50 to-orange-50 pt-10 pb-16">
         <section className="max-w-7xl mx-auto px-6">
           <CertificatesHero

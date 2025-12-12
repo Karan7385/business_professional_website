@@ -115,7 +115,6 @@ function Home() {
         <LogoLoader />
       ) : (
         <div className="bg-linear-to-br from-orange-50 via-orange-50 to-slate-100">
-          <Navbar />
 
           {sections.map(({ id, delay, render }) => (
             <AnimatedSection key={id} mounted={mounted} delayMs={delay}>

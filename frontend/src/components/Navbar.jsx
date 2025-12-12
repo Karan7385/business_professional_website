@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useLocation, NavLink } from "react-router-dom";
 import axios from "axios";
 
@@ -9,15 +9,53 @@ import TwitterLogo from "../assets/logos/twitter-logo.png";
 import WhatsappLogo from "../assets/logos/whatsapp-logo.png";
 import LinkedinLogo from "../assets/logos/linkedin-logo.png";
 
-import ContactModal from "../components/ContactModal";
+import ContactModal from "../components/ContactModal.jsx";
 
-export default function NavbarA() {
-  const [openModal, setOpenModal] = useState(false);
+export default function NavbarA({ openModal, setOpenModal }) {
+  const BASE_SERVER_URL = "http://localhost:3000";
+
+  /* ================= AUTO OPEN LOGIC ================= */
+
+  const firstTimeoutRef = useRef(null);
+  const intervalRef = useRef(null);
+  const modalOpenRef = useRef(false);
+
+  // Keep ref synced with state
+  useEffect(() => {
+    modalOpenRef.current = openModal;
+  }, [openModal]);
+
+  useEffect(() => {
+    // ⏱ First open after 30 seconds
+    firstTimeoutRef.current = setTimeout(() => {
+      if (!modalOpenRef.current) {
+        setOpenModal(true);
+      }
+
+      // 🔁 Open every 1 minute after first trigger
+      intervalRef.current = setInterval(() => {
+        if (!modalOpenRef.current) {
+          setOpenModal(true);
+        }
+      }, 120_000);
+    }, 30_000);
+
+    return () => {
+      if (firstTimeoutRef.current) clearTimeout(firstTimeoutRef.current);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  /* ================= AUTO OPEN LOGIC ================= */
+
   const [open, setOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [prodData, setProdData] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   const location = useLocation();
   const navbarRef = useRef(null);
@@ -31,19 +69,24 @@ export default function NavbarA() {
 
   useEffect(() => {
     const data = async () => {
-      const res = await axios.get("http://localhost:3000/api/products/get-categories");
+      const res = await axios.get("http://localhost:3000/api/products/");
+
       setProdData(res.data.data);
     }
 
     data();
   }, []);
 
-  const PRODUCT_CATEGORIES = prodData.map((item) => {
-    return {
-      label: item.category,
-      value: item.category
-    }
-  });
+  const groupedProducts = useMemo(() => {
+    const map = {};
+    prodData.forEach((p) => {
+      if (!map[p.category]) map[p.category] = [];
+      map[p.category].push(p);
+    });
+    return map;
+  }, [prodData]);
+
+  const PRODUCT_CATEGORIES = Object.keys(groupedProducts);
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -92,7 +135,7 @@ export default function NavbarA() {
     <>
       <header className="w-full">
         {/* TOP BAR - Professional Branding */}
-        <div className="bg-gradient-to-r from-[#EDDBAB] via-[#F7E6C4] to-[#EAC97C] backdrop-blur-sm border-b border-[#EAC97C]/40 py-2 sm:py-0">
+        <div className="bg-linear-to-r from-[#EDDBAB] via-[#F7E6C4] to-[#EAC97C] backdrop-blur-sm border-b border-[#EAC97C]/40 py-2 sm:py-0">
           <div className="max-w-7xl mx-auto px-6 lg:px-4">
             <div className="flex items-center justify-between">
               <Link
@@ -113,9 +156,6 @@ export default function NavbarA() {
                   <h1 className="text-xl font-bold text-[#7A1F1F] leading-tight unbounded-heading">
                     PT INDO BUSINESS EXPORTS
                   </h1>
-                  <p className="text-xs text-[#7A1F1F] font-medium unbounded-subHeading">
-                    IMPORTER & EXPORTER
-                  </p>
                   <p className="text-xs text-[#7A1F1F] font-medium unbounded-subHeading">
                     SPICES, HERBS, GUMS RESINS AND NATURAL ESSENTIAL OILS
                   </p>
@@ -195,22 +235,114 @@ export default function NavbarA() {
                         </button>
 
                         {productOpen && (
-                          <div className="absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-xl py-2 z-50">
-                            {item.dropdown.map((sub) => (
-                              <Link
-                                key={sub.value}
-                                to={{
-                                  pathname: "/products",
-                                  search: `?category=${encodeURIComponent(
-                                    sub.value
-                                  )}`,
-                                }}
-                                className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#7A1F1F] hover:pl-6 transition-all duration-150 font-medium border-l-2 border-transparent hover:border-[#EAC97C]"
-                                onClick={() => setProductOpen(false)}
-                              >
-                                {sub.label}
-                              </Link>
-                            ))}
+                          <div className="absolute left-0 mt-4 w-[720px] 
+                            bg-white/90 backdrop-blur-xl
+                            border border-white/40
+                            rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)]
+                            z-50 overflow-hidden
+                            animate-fade-in"
+                          >
+
+                            <div className="flex">
+
+                              {/* LEFT: Categories */}
+                              <div className="w-1/3 border-r bg-linear-to-br from-orange-100 via-orange-50 to-amber-100">
+                                {PRODUCT_CATEGORIES.map((cat) => (
+                                  <button
+                                    key={cat}
+                                    onMouseEnter={() => setActiveCategory(cat)}
+                                    className={`group w-full text-left px-6 py-4 text-sm font-semibold
+                                      transition-all duration-300 relative
+                                      ${activeCategory === cat
+                                        ? "bg-white text-[#7A1F1F]"
+                                        : "text-gray-700 hover:bg-white/70"
+                                      }`}
+                                  >
+                                    {/* Active indicator */}
+                                    <span
+                                      className={`absolute left-0 top-0 h-full w-1 rounded-r-lg transition-all duration-300 ${activeCategory === cat
+                                        ? "bg-[#EAC97C]"
+                                        : "bg-transparent group-hover:bg-[#EAC97C]/50"
+                                        }`}
+                                    />
+
+                                    <span className="relative z-10">{cat}</span>
+                                  </button>
+
+                                ))}
+                              </div>
+
+                              {/* RIGHT: Products */}
+                              <div className="w-2/3 p-4 bg-linear-to-br from-slate-50 via-orange-100 to-slate-50">
+
+                                <div className="sticky top-0 backdrop-blur-md pb-3 z-10">
+                                  <div className="relative">
+                                    <svg
+                                      className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      strokeWidth={2}
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path d="M21 21l-4.35-4.35M16 11a5 5 0 11-10 0 5 5 0 0110 0z" />
+                                    </svg>
+
+                                    <input
+                                      type="text"
+                                      placeholder="Search products..."
+                                      value={searchTerm}
+                                      onChange={(e) => setSearchTerm(e.target.value)}
+                                      className="w-full pl-9 text-sm
+                                      rounded-xl border border-amber-200
+                                      focus:ring-2 focus:ring-[#EAC97C]/60
+                                      outline-none bg-white"
+                                    />
+                                  </div>
+                                </div>
+
+
+                                {/* Product List */}
+                                <div className="max-h-64 overflow-y-auto space-y-2 pr-2">
+                                  {(groupedProducts[activeCategory] || [])
+                                    .filter((p) =>
+                                      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+                                    )
+                                    .map((product) => (
+                                      <Link
+                                        key={product.id}
+                                        to={`/products?category=${encodeURIComponent(
+                                          product.category
+                                        )}&product=${encodeURIComponent(product.name)}`}
+                                        onClick={() => {
+                                          setProductOpen(false);
+                                          setSearchTerm("");
+                                        }}
+                                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-orange-200 transition-all group"
+                                      >
+                                        <img
+                                          src={BASE_SERVER_URL + product.images?.[0]}
+                                          alt={product.name}
+                                          className="w-12 h-12 rounded-lg object-cover border"
+                                        />
+                                        <div>
+                                          <p className="text-sm font-semibold text-gray-800 group-hover:text-[#7A1F1F]">
+                                            {product.name}
+                                          </p>
+                                          <p className="text-xs text-gray-500">
+                                            {product.origin}
+                                          </p>
+                                        </div>
+                                      </Link>
+                                    ))}
+
+                                  {!activeCategory && (
+                                    <p className="text-sm text-gray-500 text-center py-10">
+                                      Hover on a category to view products
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -303,14 +435,16 @@ export default function NavbarA() {
                   About
                 </NavLink>
 
-                <div>
+                <div className="rounded-2xl border backdrop-blur-md shadow-sm overflow-hidden">
+
+                  {/* Products Header */}
                   <button
-                    className="w-full flex items-center justify-between px-4 py-3 text-lg font-semibold text-gray-700 hover:text-[#7A1F1F] hover:bg-gray-50 rounded-xl transition-all duration-200"
+                    className="w-full flex items-center justify-between px-5 py-4 text-lg font-bold text-gray-800"
                     onClick={() => setProductOpen((prev) => !prev)}
                   >
                     <span>Products</span>
                     <svg
-                      className={`w-5 h-5 transition-transform duration-200 ${productOpen ? "rotate-180" : ""
+                      className={`w-5 h-5 transition-transform duration-300 ${productOpen ? "rotate-180" : ""
                         }`}
                       viewBox="0 0 24 24"
                       fill="none"
@@ -322,25 +456,101 @@ export default function NavbarA() {
                   </button>
 
                   {productOpen && (
-                    <div className="mt-2 space-y-1 pl-4">
-                      {PRODUCT_CATEGORIES.map((sub) => (
-                        <Link
-                          key={sub.value}
-                          to={{
-                            pathname: "/products",
-                            search: `?category=${encodeURIComponent(
-                              sub.value
-                            )}`,
-                          }}
-                          className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7A1F1F] hover:bg-gray-50 hover:pl-4 transition-all duration-150 rounded-lg"
-                          onClick={() => {
-                            setOpen(false);
-                            setProductOpen(false);
-                          }}
+                    <div className="px-4 pb-4 space-y-4 animate-fade-in bg-linear-to-br from-slate-50 via-orange-100 to-slate-50">
+
+                      {/* Search */}
+                      <div className="relative">
+                        <svg
+                          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          viewBox="0 0 24 24"
                         >
-                          {sub.label}
-                        </Link>
-                      ))}
+                          <path d="M21 21l-4.35-4.35M16 11a5 5 0 11-10 0 5 5 0 0110 0z" />
+                        </svg>
+
+                        <input
+                          type="text"
+                          placeholder="Search products..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-gray-200
+          focus:ring-2 focus:ring-[#EAC97C]/60 outline-none bg-white"
+                        />
+                      </div>
+
+                      {/* Categories */}
+                      <div className="space-y-3">
+                        {PRODUCT_CATEGORIES.map((cat) => {
+                          const filteredProducts = groupedProducts[cat].filter((p) =>
+                            p.name.toLowerCase().includes(searchTerm.toLowerCase())
+                          );
+
+                          return (
+                            <div
+                              key={cat}
+                              className="rounded-xl border overflow-hidden"
+                            >
+                              {/* Category Header */}
+                              <button
+                                onClick={() =>
+                                  setActiveCategory(activeCategory === cat ? null : cat)
+                                }
+                                className="w-full flex justify-between items-center px-4 py-3 font-semibold text-gray-800"
+                              >
+                                <span>{cat}</span>
+                                <span className="text-xl">
+                                  {activeCategory === cat ? "−" : "+"}
+                                </span>
+                              </button>
+
+                              {/* Products */}
+                              {activeCategory === cat && (
+                                <div className="max-h-56 overflow-y-auto px-3 pb-3 space-y-3 animate-fade-in">
+                                  {filteredProducts.length > 0 ? (
+                                    filteredProducts.map((product) => (
+                                      <Link
+                                        key={product.id}
+                                        to={`/products?category=${encodeURIComponent(
+                                          product.category
+                                        )}&product=${encodeURIComponent(product.name)}`}
+                                        onClick={() => {
+                                          setOpen(false);
+                                          setActiveCategory(null);
+                                          setProductOpen(false);
+                                          setSearchTerm("");
+                                        }}
+                                        className="flex gap-3 p-3 rounded-xl  hover:bg-orange-200
+                          transition-all duration-300"
+                                      >
+                                        <img
+                                          src={BASE_SERVER_URL + product.images?.[0]}
+                                          alt={product.name}
+                                          className="w-12 h-12 rounded-lg object-cover border"
+                                        />
+
+                                        <div>
+                                          <p className="text-sm font-bold text-gray-800">
+                                            {product.name}
+                                          </p>
+                                          <p className="text-xs text-gray-500">
+                                            {product.origin}
+                                          </p>
+                                        </div>
+                                      </Link>
+                                    ))
+                                  ) : (
+                                    <p className="text-sm text-gray-400 text-center py-4">
+                                      No products found
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -376,7 +586,7 @@ export default function NavbarA() {
                     setOpen(false);
                     setOpenModal(true);
                   }}
-                  className="w-full px-6 py-4 text-lg font-semibold text-[#7A1F1F] hover:bg-gradient-to-r bg-gradient-to-r from-[#EAC97C] to-[#d8b569] hover:from-[#EAC97C] hover:to-[#d8b569] rounded-xl transition-all duration-200 shadow-sm hover:shadow-md border border-transparent"
+                  className="w-full px-6 py-4 text-lg font-semibold text-[#7A1F1F] hover:bg-linear-to-r bg-linear-to-r from-[#EAC97C] to-[#d8b569] hover:from-[#EAC97C] hover:to-[#d8b569] rounded-xl transition-all duration-200 shadow-sm hover:shadow-md border border-transparent"
                 >
                   Contact Us
                 </button>

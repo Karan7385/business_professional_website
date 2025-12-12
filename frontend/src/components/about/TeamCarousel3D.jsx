@@ -100,13 +100,7 @@ const TeamCarousel3D = memo(function TeamCarousel3D({ members }) {
                         {member.name}
                       </h5>
 
-                      <div className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-[#EAC97C]/15 rounded-full mb-3 sm:mb-4">
-                        <p className="text-sm sm:text-base md:text-lg font-semibold text-[#7A1F1F]/90 unbounded-subHeading">
-                          {member.title}
-                        </p>
-                      </div>
-
-                      <p className="text-xs sm:text-sm md:text-base text-[#4b2b2b]/80 leading-relaxed line-clamp-3 sm:line-clamp-4 sanchez-regular text-justify">
+                      <p className="text-xs sm:text-sm md:text-base text-[#4b2b2b]/80 leading-relaxed sanchez-regular text-justify">
                         {member.bio}
                       </p>
                     </div>

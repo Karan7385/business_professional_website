@@ -28,7 +28,15 @@ const initialFormState = {
   moisture: "",
   min_order_qty: "",
   description: "",
-  packaging: "", // comma-separated values, stored as JSON array on backend
+  packaging: "",
+
+  // NEW FIELDS
+  hs_code: "",
+  loading: "",
+  colour: "",
+  stems: "",
+  size: "",
+  port_of_loading: "",
 };
 
 // ======================== Initial state for the product form ===================================
@@ -88,11 +96,19 @@ export default function ProductsPage() {
       origin: product.origin || "",
       grade: product.grade || "",
       moisture: product.moisture || "",
-      min_order_qty: product.min_order_qty || product.minOrderQty || "",
+      min_order_qty: product.min_order_qty || "",
       description: product.description || "",
       packaging: Array.isArray(product.packaging)
         ? product.packaging.join(", ")
         : product.packaging || "",
+
+      // NEW FIELDS
+      hs_code: product.hs_code || "",
+      loading: product.loading || "",
+      colour: product.colour || "",
+      stems: product.stems || "",
+      size: product.size || "",
+      port_of_loading: product.port_of_loading || "",
     });
 
     setExistingImages(product.images || []);
@@ -180,6 +196,13 @@ export default function ProductsPage() {
       formData.append("moisture", form.moisture);
       formData.append("min_order_qty", form.min_order_qty);
       formData.append("description", form.description);
+      formData.append("hs_code", form.hs_code);
+      formData.append("loading", form.loading);
+      formData.append("colour", form.colour);
+      formData.append("stems", form.stems);
+      formData.append("size", form.size);
+      formData.append("port_of_loading", form.port_of_loading);
+
 
       // packaging: convert comma-separated string into JSON array
       let packagingArray = [];
@@ -480,9 +503,8 @@ export default function ProductsPage() {
                             product._id ??
                             `${product.name}-${idx}`
                           }
-                          className={`border-t border-amber-50/80 ${
-                            idx % 2 === 0 ? "bg-white/90" : "bg-amber-50/50"
-                          } transition-colors hover:bg-amber-100/60 sanchez-regular`}
+                          className={`border-t border-amber-50/80 ${idx % 2 === 0 ? "bg-white/90" : "bg-amber-50/50"
+                            } transition-colors hover:bg-amber-100/60 sanchez-regular`}
                         >
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-3">
@@ -492,7 +514,7 @@ export default function ProductsPage() {
                                   <img
                                     src={
                                       firstImageSrc === "/mock-pepper.jpg" ||
-                                      firstImageSrc === "/mock-cinnamon.jpg"
+                                        firstImageSrc === "/mock-cinnamon.jpg"
                                         ? MOCK_IMAGE_URL
                                         : firstImageSrc
                                     }
@@ -597,13 +619,13 @@ export default function ProductsPage() {
                       role="listitem"
                       className="px-4 py-4 flex gap-3 sanchez-regular bg-white/80"
                     >
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         <div className="w-16 h-16 rounded-xl bg-amber-100/60 flex items-center justify-center overflow-hidden shadow-md">
                           {firstImageSrc ? (
                             <img
                               src={
                                 firstImageSrc === "/mock-pepper.jpg" ||
-                                firstImageSrc === "/mock-cinnamon.jpg"
+                                  firstImageSrc === "/mock-cinnamon.jpg"
                                   ? MOCK_IMAGE_URL
                                   : firstImageSrc
                               }
@@ -796,6 +818,56 @@ export default function ProductsPage() {
                 />
                 <div /> {/* spacer */}
 
+                {/* Export Details */}
+                <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormInput
+                    name="hs_code"
+                    label="HS Code"
+                    value={form.hs_code}
+                    onChange={handleInputChange}
+                    placeholder="09071020"
+                  />
+                  <FormInput
+                    name="loading"
+                    label="Loading"
+                    value={form.loading}
+                    onChange={handleInputChange}
+                    placeholder="8.5 tonnes / 20 feet"
+                  />
+                  <FormInput
+                    name="colour"
+                    label="Colour"
+                    value={form.colour}
+                    onChange={handleInputChange}
+                    placeholder="Brown"
+                  />
+                </div>
+
+                <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormInput
+                    name="stems"
+                    label="Stems %"
+                    value={form.stems}
+                    onChange={handleInputChange}
+                    placeholder="3 to 5%"
+                  />
+                  <FormInput
+                    name="size"
+                    label="Size"
+                    value={form.size}
+                    onChange={handleInputChange}
+                    placeholder="9mm to 12mm"
+                  />
+                  <FormInput
+                    name="port_of_loading"
+                    label="Port of Loading"
+                    value={form.port_of_loading}
+                    onChange={handleInputChange}
+                    placeholder="Dar es Salaam"
+                  />
+                </div>
+
+
                 {/* Packaging (JSON) */}
                 <div className="md:col-span-2">
                   <label className="block text-xs font-semibold text-slate-700 mb-1 unbounded-heading">
@@ -854,7 +926,7 @@ export default function ProductsPage() {
                                   <img
                                     src={
                                       imgSrc === "/mock-pepper.jpg" ||
-                                      imgSrc === "/mock-cinnamon.jpg"
+                                        imgSrc === "/mock-cinnamon.jpg"
                                         ? MOCK_IMAGE_URL
                                         : imgSrc
                                     }

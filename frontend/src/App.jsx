@@ -1,48 +1,104 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+// Pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import { Certificates } from "./pages/Certs/Certificates";
 import Product from "./pages/Products/Product";
 
-// Admin Imports
+// Admin
 import LoginPage from "./admin/LoginPage";
 import AdminLayout from "./admin/layouts/AdminLayout";
 import ProtectedRoute from "./admin/components/auth/ProtectedRoute";
-import { useState } from "react";
-import axios from "axios";
 
-function App() {
+// Navbar + Context
+import NavbarA from "./components/Navbar.jsx";
+import ContactModalContext from "./context/ContactModalContext.jsx";
+
+/* ================= WRAPPER ================= */
+
+function AppContent() {
+  const location = useLocation();
+
+  /* ================= PRODUCTS ================= */
   const [productData, setProductData] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
 
-  useState(async () => {
-    const res = await axios.get("http://localhost:3000/api/products");
-    setProductData(res.data.data);    
+  /* ================= CONTACT MODAL ================= */
+  const [openModal, setOpenModal] = useState(false);
+
+  // 🔹 Hide navbar on admin routes
+  const hideNavbar =
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/login");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/products");
+        setProductData(res.data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch products", error);
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/certs" element={<Certificates />} />
-          <Route path="/products" element={<Product products={productData} />} />
+    <ContactModalContext.Provider
+      value={{
+        openContactModal: () => setOpenModal(true),
+      }}
+    >
+      {/* ✅ Navbar only for public pages */}
+      {!hideNavbar && (
+        <NavbarA openModal={openModal} setOpenModal={setOpenModal} />
+      )}
 
-          {/* Admin */}
-          <Route path="/login" element={<LoginPage />} />
+      <Routes>
+        {/* Public Pages */}
+        <Route path="/" element={<Home products={productData} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/certs" element={<Certificates />} />
+        <Route
+          path="/products"
+          element={
+            <Product
+              products={productData}
+              isLoading={loadingProducts}
+            />
+          }
+        />
 
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </>
-  )
+        {/* Admin */}
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </ContactModalContext.Provider>
+  );
 }
 
-export default App
+/* ================= ROOT ================= */
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+export default App;

@@ -22,8 +22,6 @@ function About() {
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen bg-linear-to-br from-orange-50 via-orange-50 to-slate-100 pt-5">
         <section className="w-full flex flex-col gap-12">
           <HeroMissionVision

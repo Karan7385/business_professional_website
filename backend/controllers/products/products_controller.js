@@ -68,7 +68,7 @@ async function get_products(req, res) {
 async function get_products_name(req, res) {
     try {
         const rows = await get_products_name_model();
-        
+
         return res.status(200).json({
             success: true,
             data: rows[0],
@@ -111,7 +111,15 @@ async function create_product(req, res) {
             moisture = "",
             min_order_qty = "",
             description = "",
-            packaging = "[]", // frontend usually sends JSON.stringify([...])
+            packaging = "[]",
+
+            // NEW FIELDS
+            hs_code = "",
+            loading = "",
+            colour = "",
+            stems = "",
+            size = "",
+            port_of_loading = "",
         } = req.body;
 
         if (!name || !category) {
@@ -154,6 +162,14 @@ async function create_product(req, res) {
             min_order_qty,
             packaging: packagingJson,
             images: imagesJson,
+
+            // NEW FIELDS
+            hs_code,
+            loading,
+            colour,
+            stems,
+            size,
+            port_of_loading,
         };
 
         const [result] = await create_product_model(item);
@@ -204,7 +220,15 @@ async function edit_product(req, res) {
             min_order_qty = "",
             description = "",
             packaging = null,
-            existing_images, // JSON string from frontend (array of strings)
+            existing_images,
+
+            // NEW FIELDS
+            hs_code = "",
+            loading = "",
+            colour = "",
+            stems = "",
+            size = "",
+            port_of_loading = "",
         } = req.body;
 
         if (!name || !category) {
@@ -290,6 +314,14 @@ async function edit_product(req, res) {
             min_order_qty,
             packaging: packagingJson,
             images: imagesJson,
+
+            // NEW FIELDS
+            hs_code,
+            loading,
+            colour,
+            stems,
+            size,
+            port_of_loading,
         };
 
         await edit_product_model(productId, item);

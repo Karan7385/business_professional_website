@@ -5,17 +5,22 @@ const BASE_SERVER_URL = "http://localhost:3000";
 
 function ProductVerticalSliderBase(props) {
 
-  const DEFAULT_PRODUCTS = props.data.map((item) => {
-    return {
+  const DEFAULT_PRODUCTS = [...props.data]
+    // 1️⃣ sort by newest first (created_at preferred)
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    // 2️⃣ take only latest 10
+    .slice(0, 10)
+    // 3️⃣ map to slider format
+    .map((item) => ({
       id: item.id,
       name: item.name,
       type: item.category,
       grade: item.grade,
       description: item.description,
-      imageUrl: [...item.images],
+      imageUrl: item.images?.[0] || null,
       imageAlt: item.name,
-    };
-  });
+    }));
+
 
 
   const [activeIndex, setActiveIndex] = useState(0);

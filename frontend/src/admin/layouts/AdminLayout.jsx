@@ -374,7 +374,7 @@ export default function AdminLayout() {
                   </span>
                 </span>
                 <span className="text-[11px] text-slate-500 tracking-wide unbounded-subHeading">
-                  IMPORT &amp; EXPORT · Admin Panel
+                  SPICES, HERBS, GUMS RESINS AND NATURAL ESSENTIAL OILS · Admin Panel
                 </span>
               </div>
             </div>

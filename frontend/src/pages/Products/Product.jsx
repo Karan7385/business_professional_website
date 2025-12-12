@@ -4,7 +4,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -22,9 +22,8 @@ import ProductFiltersBar from "../../components/products/ProductFiltersBar";
 const { primary, backgroundClasses } = SPICE_THEME;
 
 function Product({ products = PRODUCTS }) {
-  // If no products are passed via props, fall back to PRODUCTS from config.
-
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -36,35 +35,47 @@ function Product({ products = PRODUCTS }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-  // Apply category from URL (?category=Spices)
+  /* --------------------------------------------------
+     ✅ HYDRATE STATE FROM URL
+     -------------------------------------------------- */
   useEffect(() => {
     const categoryFromUrl = searchParams.get("category");
-    if (!categoryFromUrl) return;
+    const productFromUrl = searchParams.get("product");
 
-    setCategoryFilter((prev) =>
-      prev === categoryFromUrl ? prev : categoryFromUrl
-    );
+    if (categoryFromUrl) {
+      setCategoryFilter(categoryFromUrl);
+    }
+
+    if (productFromUrl) {
+      setSearch(decodeURIComponent(productFromUrl));
+    }
   }, [searchParams]);
 
-  // Simulate "loading complete" after products are available
-  // (if you add real fetching later, move that logic here).
+  /* --------------------------------------------------
+     Simulate loading (replace with real API later)
+     -------------------------------------------------- */
   useEffect(() => {
     setIsLoading(false);
   }, [products]);
 
-  // Unique categories for dropdown
+  /* --------------------------------------------------
+     Categories
+     -------------------------------------------------- */
   const categories = useMemo(() => {
     if (!products || products.length === 0) return ["All"];
 
     const set = new Set(
       products
         .map((p) => p.category)
-        .filter(Boolean) // ignore undefined/null
+        .filter(Boolean)
     );
+
     return ["All", ...Array.from(set)];
   }, [products]);
 
-  // Filter + search + sort
+  /* --------------------------------------------------
+     Filtering + Searching + Sorting
+     -------------------------------------------------- */
   const filteredProducts = useMemo(() => {
     if (!products || products.length === 0) return [];
 
@@ -91,7 +102,9 @@ function Product({ products = PRODUCTS }) {
 
     switch (sortBy) {
       case "name-desc":
-        data.sort((a, b) => (a.name || "").localeCompare(b.name || "") * -1);
+        data.sort((a, b) =>
+          (b.name || "").localeCompare(a.name || "")
+        );
         break;
       case "origin-asc":
         data.sort((a, b) =>
@@ -114,6 +127,9 @@ function Product({ products = PRODUCTS }) {
     return data;
   }, [products, search, categoryFilter, sortBy]);
 
+  /* --------------------------------------------------
+     Handlers
+     -------------------------------------------------- */
   const handleViewDetails = useCallback((product) => {
     setSelectedProduct(product);
     setIsSheetOpen(true);
@@ -121,16 +137,25 @@ function Product({ products = PRODUCTS }) {
 
   const handleCloseSheet = useCallback(() => {
     setIsSheetOpen(false);
-    // delay clearing so exit animation can play, if you have one
     setTimeout(() => setSelectedProduct(null), 300);
   }, []);
 
+  /* Optional: clear URL params when user changes filters */
+  const handleSearchChange = (value) => {
+    setSearch(value);
+    navigate("/products", { replace: true });
+  };
+
+  const handleCategoryChange = (value) => {
+    setCategoryFilter(value);
+    navigate("/products", { replace: true });
+  };
+
   return (
     <>
-      <Navbar />
-
       <main className={backgroundClasses}>
         <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pt-10 md:pt-20 pb-14">
+
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
@@ -150,9 +175,9 @@ function Product({ products = PRODUCTS }) {
 
             <ProductFiltersBar
               search={search}
-              onSearchChange={setSearch}
+              onSearchChange={handleSearchChange}
               categoryFilter={categoryFilter}
-              onCategoryChange={setCategoryFilter}
+              onCategoryChange={handleCategoryChange}
               sortBy={sortBy}
               onSortChange={setSortBy}
               categories={categories}
@@ -161,7 +186,7 @@ function Product({ products = PRODUCTS }) {
             />
           </div>
 
-          {/* Loading / Error */}
+          {/* Loading */}
           {isLoading && (
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => (
@@ -181,6 +206,7 @@ function Product({ products = PRODUCTS }) {
             </div>
           )}
 
+          {/* Error */}
           {error && !isLoading && (
             <div className="text-center py-10 text-[#B2501F] bg-[#FFF1E6] border border-[#F4B89A] rounded-2xl max-w-xl mx-auto">
               {error}
@@ -192,15 +218,15 @@ function Product({ products = PRODUCTS }) {
             <>
               {filteredProducts.length === 0 ? (
                 <div className="text-center py-10 text-[#6B4B3A]">
-                  No products matched your search. Try adjusting filters or
-                  keywords.
+                  No products matched your search.
                 </div>
               ) : (
-                <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                  {filteredProducts.map((product) => (
+                <div>
+                  {filteredProducts.map((product, index) => (
                     <ProductCard
                       key={product.id}
                       product={product}
+                      index={index}
                       onView={handleViewDetails}
                     />
                   ))}

@@ -42,7 +42,7 @@ function CoreValues({ mounted, sectionBase, sectionActive }) {
                     {value.title}
                   </h5>
 
-                  <p className="mt-4 text-sm sm:text-base md:text-lg leading-relaxed font-medium text-[#fffceb] drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)] unbounded-subHeading text-justify">
+                  <p className="mt-4 text-sm sm:text-base md:text-lg leading-relaxed font-medium text-[#fffceb] drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)] unbounded-subHeading">
                     {value.desc}
                   </p>
                 </div>

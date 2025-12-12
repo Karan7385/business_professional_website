@@ -38,7 +38,7 @@ CREATE TABLE `tabs_stat_items` (
 
 LOCK TABLES `tabs_stat_items` WRITE;
 /*!40000 ALTER TABLE `tabs_stat_items` DISABLE KEYS */;
-INSERT INTO `tabs_stat_items` VALUES (1,'150+','Exported product categories','2025-12-02 13:16:09','2025-12-02 15:35:43'),(2,'20+','Countries serve','2025-12-02 13:16:09','2025-12-02 15:35:43'),(3,'5000 MT+','Annual export volume','2025-12-02 13:16:09','2025-12-02 13:16:09'),(4,'100%','Quality-assured goods','2025-12-02 13:16:09','2025-12-02 13:16:09'),(5,'7+ Gen','Family legacy in spices','2025-12-02 13:16:09','2025-12-02 13:16:09'),(6,'300+','Global buyers','2025-12-02 13:16:09','2025-12-02 13:16:09');
+INSERT INTO `tabs_stat_items` VALUES (1,'150+','Exported product categories','2025-12-02 13:16:09','2025-12-02 15:35:43'),(2,'20+','Countries serve','2025-12-02 13:16:09','2025-12-02 15:35:43'),(3,'5 MT+','Annual export volume','2025-12-02 13:16:09','2025-12-07 06:37:01'),(4,'100%','Quality-assured goods','2025-12-02 13:16:09','2025-12-02 13:16:09'),(5,'7+ Gen','Family legacy in spices','2025-12-02 13:16:09','2025-12-02 13:16:09'),(6,'300+','Global buyers','2025-12-02 13:16:09','2025-12-02 13:16:09');
 /*!40000 ALTER TABLE `tabs_stat_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-06 23:39:17
+-- Dump completed on 2025-12-13  5:02:33

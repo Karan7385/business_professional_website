@@ -35,7 +35,16 @@ function edit_product_model(id, items = {}) {
       description = ?,
       min_order_qty = ?,
       packaging = ?,
-      images = ?
+      images = ?,
+
+      -- NEW FIELDS
+      hs_code = ?,
+      loading = ?,
+      colour = ?,
+      stems = ?,
+      size = ?,
+      port_of_loading = ?
+
     WHERE id = ?
   `;
 
@@ -49,6 +58,15 @@ function edit_product_model(id, items = {}) {
     items.min_order_qty,
     items.packaging,
     items.images,
+
+    // NEW FIELDS
+    items.hs_code,
+    items.loading,
+    items.colour,
+    items.stems,
+    items.size,
+    items.port_of_loading,
+
     id,
   ];
 
@@ -58,11 +76,29 @@ function edit_product_model(id, items = {}) {
 function create_product_model(items = {}) {
   const query = `
     INSERT INTO products
-      (name, category, origin, grade, moisture, description, min_order_qty, packaging, images)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    (
+      name,
+      category,
+      origin,
+      grade,
+      moisture,
+      description,
+      min_order_qty,
+      packaging,
+      images,
+
+      -- NEW FIELDS
+      hs_code,
+      loading,
+      colour,
+      stems,
+      size,
+      port_of_loading
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  return pool.execute(query, [
+  const params = [
     items.name,
     items.category,
     items.origin,
@@ -72,7 +108,17 @@ function create_product_model(items = {}) {
     items.min_order_qty,
     items.packaging,
     items.images,
-  ]);
+
+    // NEW FIELDS
+    items.hs_code,
+    items.loading,
+    items.colour,
+    items.stems,
+    items.size,
+    items.port_of_loading,
+  ];
+
+  return pool.execute(query, params);
 }
 
 function delete_product_model(id) {
