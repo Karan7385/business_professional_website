@@ -10,8 +10,8 @@ import { create_logs } from "../../models/logs/logs_model.js";
 
 import fs from "fs";
 import path from "path";
+import { log } from "console";
 
-// helper to safely parse JSON
 function safeJsonParse(str, fallback) {
     try {
         if (!str) return fallback;
@@ -21,7 +21,6 @@ function safeJsonParse(str, fallback) {
     }
 }
 
-// delete files from disk given JSON string of ["relative/path1", ...]
 function deleteImageFiles(imagesJson) {
     const paths = safeJsonParse(imagesJson, []);
     if (!Array.isArray(paths)) return;
@@ -39,6 +38,7 @@ function deleteImageFiles(imagesJson) {
         });
     });
 }
+
 
 async function get_products(req, res) {
     try {
@@ -65,6 +65,7 @@ async function get_products(req, res) {
     }
 }
 
+
 async function get_products_name(req, res) {
     try {
         const rows = await get_products_name_model();
@@ -83,10 +84,10 @@ async function get_products_name(req, res) {
     }
 }
 
+
 async function get_categories_name(req, res) {
     try {
-        const [rows] = await get_categories_name_model();
-
+        const rows = await get_categories_name_model();
         return res.status(200).json({
             success: true,
             data: rows,
@@ -100,6 +101,7 @@ async function get_categories_name(req, res) {
         });
     }
 }
+
 
 async function create_product(req, res) {
     try {
@@ -120,6 +122,7 @@ async function create_product(req, res) {
             stems = "",
             size = "",
             port_of_loading = "",
+            additional_info = "",
         } = req.body;
 
         if (!name || !category) {
@@ -167,9 +170,10 @@ async function create_product(req, res) {
             hs_code,
             loading,
             colour,
-            stems,
-            size,
+            stems: stems ? "NA" : stems,
+            size: size ? "NA" : size,
             port_of_loading,
+            additional_info,
         };
 
         const [result] = await create_product_model(item);
@@ -198,6 +202,7 @@ async function create_product(req, res) {
         });
     }
 }
+
 
 async function edit_product(req, res) {
     try {
@@ -229,6 +234,7 @@ async function edit_product(req, res) {
             stems = "",
             size = "",
             port_of_loading = "",
+            additional_info = "",
         } = req.body;
 
         if (!name || !category) {
@@ -319,9 +325,10 @@ async function edit_product(req, res) {
             hs_code,
             loading,
             colour,
-            stems,
-            size,
+            stems: stems ? "NA" : stems,
+            size: size ? "NA" : size,
             port_of_loading,
+            additional_info,
         };
 
         await edit_product_model(productId, item);
@@ -348,6 +355,7 @@ async function edit_product(req, res) {
         });
     }
 }
+
 
 async function delete_product(req, res) {
     try {
@@ -389,6 +397,7 @@ async function delete_product(req, res) {
             success: true,
             message: "Product deleted successfully",
         });
+        
     } catch (error) {
         console.error("Error deleting product:", error);
         return res.status(500).json({

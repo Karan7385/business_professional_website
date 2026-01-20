@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 function ProductDetailsSheet({ product, isOpen, onClose }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -23,7 +23,7 @@ function ProductDetailsSheet({ product, isOpen, onClose }) {
     );
   };
 
-  const BASE_SERVER_URL="http://localhost:3000";
+  const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_UR;
 
   return (
     <>

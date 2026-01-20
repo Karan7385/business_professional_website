@@ -12,7 +12,7 @@ function ProductFiltersBar({
   filteredCount,
 }) {
   return (
-    <div className="flex flex-col md:items-end gap-3 w-full md:w-auto">
+    <div className="flex flex-col md:items-end gap-3 w-full md:w-auto hidden">
       <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
         {/* Search */}
         <div className="relative flex-1 min-w-[220px]">

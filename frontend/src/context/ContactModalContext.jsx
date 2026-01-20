@@ -1,7 +1,11 @@
-import { createContext, useContext } from "react";
+import {
+  createContext,
+  useContext
+} from "react";
 
 const ContactModalContext = createContext({
   openContactModal: () => {},
+  products: [],
 });
 
 export const useContactModal = () => useContext(ContactModalContext);

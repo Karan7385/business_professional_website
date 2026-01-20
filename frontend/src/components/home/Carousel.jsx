@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback, memo } from "react";
-import DummyImage from "../../assets/images/dummy-image.png";
 
 const AUTOPLAY_INTERVAL = 5000; // ms
-const BASE_SERVER_URL = "http://localhost:3000";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 // =================== CAROUSEL COMPONENT ===================
 

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
+import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import { TEAM_MEMBERS } from "../../data/aboutConfig";
 import TeamCarousel3D from "../../components/about/TeamCarousel3D";

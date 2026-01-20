@@ -1,4 +1,4 @@
-import express from  'express';
+import express from 'express';
 
 import {
     handle_submit,
@@ -8,8 +8,13 @@ import {
 
 const router = express.Router();
 
+// POST /api/contact/
 router.post('/submit-enquiries', handle_submit);
+
+// GET /api/contact/
 router.get('/list-enquiries', get_enquiries);
+
+// PATCH /api/contact/
 router.patch('/enquiries/:id/status', update_enquiry_status);
 
 export default router;

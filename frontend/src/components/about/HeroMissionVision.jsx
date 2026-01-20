@@ -1,4 +1,3 @@
-import React from "react";
 import { HERO_CONTENT, HERO_MISSION_VISION } from "../../data/aboutConfig.js";
 import spicesBg from "../../assets/images/spices.jpg";
 

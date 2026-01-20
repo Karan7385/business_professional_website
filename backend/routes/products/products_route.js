@@ -1,5 +1,7 @@
 import express from "express";
 import multer from "multer";
+
+// IMPORT CONTROLLERS
 import {
   get_products,
   create_product,
@@ -22,12 +24,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// GET /api/products/
 router.get("/", get_products);
+
+// GET /api/products/
 router.get("/get-products", get_products_name);
+
+// GET /api/products/
 router.get("/get-categories", get_categories_name);
-// router.get("/popular", get_top_products);
+
+// POST /api/products/
 router.post("/", upload.array("images"), create_product);
+
+// PUT /api/products/
 router.put("/:id", upload.array("images"), edit_product);
+
+// DELETE /api/products/
 router.delete("/:id", delete_product);
 
 export default router;

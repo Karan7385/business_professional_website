@@ -2,10 +2,10 @@ import Logo from "../assets/logos/logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
-  const BASE_SERVER_URL = "http://localhost:3000";
+  const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
   const navigate = useNavigate();
 
@@ -66,16 +66,6 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* Global toaster for this page */}
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            fontSize: "0.85rem",
-          },
-        }}
-      />
-
       <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 px-4">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 md:p-10">
           {/* Logo + Business Name */}

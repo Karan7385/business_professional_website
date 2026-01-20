@@ -39,7 +39,7 @@ CREATE TABLE `slides_home` (
 
 LOCK TABLES `slides_home` WRITE;
 /*!40000 ALTER TABLE `slides_home` DISABLE KEYS */;
-INSERT INTO `slides_home` VALUES (1,'/uploads/home/carousels/1.jpg','Rows of colorful shipping containers stacked at a port for global export logistics','Global Export Logistics','2025-12-02 15:43:50','2025-12-04 09:37:20'),(2,'/uploads/home/carousels/2.jpg','Ancient world map with compass and gold coins symbolizing global trade routes','Global Trade Routes','2025-12-02 15:43:50','2025-12-04 09:37:20'),(3,'/uploads/home/carousels/3.jpg','Wide display of dried spices and herbs in a marketplace with labels on each container','Premium Spices & Herbs','2025-12-02 15:43:50','2025-12-04 09:37:20'),(4,'/uploads/home/carousels/4.jpg','Assorted mounds of spices in a market bazaar creating a vibrant and colorful display','Authentic Spice Marketplace','2025-12-02 15:43:50','2025-12-04 09:37:20'),(5,'/uploads/home/carousels/5.jpg','Workers loading burlap sacks of agricultural produce onto a pickup truck inside a warehouse','Farm-to-Export Supply Chain','2025-12-02 15:43:50','2025-12-04 09:37:20');
+INSERT INTO `slides_home` VALUES (1,'/uploads/home/carousels/1.jpg','Workers loading burlap sacks of agricultural produce onto a pickup truck inside a warehouse','Farm-to-Export Supply Chain','2025-12-02 15:43:50','2025-12-26 07:14:17'),(2,'/uploads/home/carousels/2.jpg','Assorted mounds of spices in a market bazaar creating a vibrant and colorful display','Authentic Spice Marketplace','2025-12-02 15:43:50','2025-12-26 07:14:17'),(3,'/uploads/home/carousels/3.jpg','Wide display of dried spices and herbs in a marketplace with labels on each container','Premium Spices & Herbs','2025-12-02 15:43:50','2025-12-04 09:37:20'),(4,'/uploads/home/carousels/4.jpg','Ancient world map with compass and gold coins symbolizing global trade routes','Global Trade Routes','2025-12-02 15:43:50','2025-12-26 07:14:17'),(5,'/uploads/home/carousels/5.jpg','Rows of colorful shipping containers stacked at a port for global export logistics','Global Export Logistics','2025-12-02 15:43:50','2025-12-26 07:14:17');
 /*!40000 ALTER TABLE `slides_home` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-13  5:02:32
+-- Dump completed on 2026-01-21  1:24:58

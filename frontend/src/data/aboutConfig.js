@@ -2,10 +2,16 @@ import Amit from '../assets/images/team/Amit-Agrawal.jpeg';
 import Ram from '../assets/images/team/Ram-Prasad-Agrawal.jpeg';
 import Kshitiz from '../assets/images/team/Kshitiz-Agrawal.jpeg';
 
-const BASE_URL = "http://localhost:5173";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 export const TEAM_MEMBERS = [
+  {
+    name: "Mr Amit Agrawal",
+    title: "Director of Operations",
+    bio: "Mr Amit Agrawal is an MBA graduate in Marketing from IMT, Ghaziabad, India. He had vast experience of 14 years in Animal feed industry.",
+    image: BASE_URL + Amit,
+  },
   {
     name: "Mr. Ram Prasad Agrawal",
     title: "Chairman",
@@ -17,12 +23,6 @@ export const TEAM_MEMBERS = [
     title: "Founder",
     bio: "Mr. Kshitiz Ram Prasad Agrawal holds master’s degree from top business school in London. He has an experience of past 15 years in different trade and service industry. His innovation and enthusiasm have fuelled the growth engine of the company.",
     image: BASE_URL + Kshitiz,
-  },
-  {
-    name: "Mr Amit Agrawal",
-    title: "Director of Operations",
-    bio: "Mr Amit Agrawal is an MBA graduate in Marketing from IMT, Ghaziabad, India. He had vast experience of 14 years in Animal feed industry.",
-    image: BASE_URL + Amit,
   }
 ];
 
@@ -65,7 +65,7 @@ export const TIMELINE_EVENTS = [
 export const HERO_CONTENT = {
   title: "WHO ARE WE ?",
   intro:
-    "We are proud suppliers of premium Indonesian spices, nuts, and natural gums, catering to the Asian continent and various parts of the world.",
+    "We are proud suppliers of premium Indonesian Spices, Nuts, Gum Resins, Herbs and Natural Oils catering to the various parts of the world.",
 };
 
 export const HERO_MISSION_VISION = [
@@ -75,15 +75,15 @@ export const HERO_MISSION_VISION = [
     tag: "Quality First",
     text:
       "To deliver Indonesia’s natural excellence to the world by combining deep consumer understanding, scientific innovation, and a world-class supply chain that ensures purity, consistency, and complete customer satisfaction.",
-    highlight: "consistent quality",
+    highlight: "Consistent Quality",
   },
   {
     key: "vision",
     label: "✨ Our Vision",
     tag: "Global Reach",
     text:
-      "To be the global leader in supplying premium Indonesian spices, nuts, and natural gums—recognized for unmatched quality, authenticity, and reliability.",
-    highlight: "partner of choice",
+      "To be the global leader in supplying premium Indonesian commodities recognized for unmatched quality, authenticity, and reliability.",
+    highlight: "Partner of Choice",
   },
 ];
 
@@ -98,19 +98,19 @@ export const CORE_VALUES = [
   },
   {
     title: "Consumer Satisfaction",
-    desc: "Every product is designed to ensure complete consumer satisfaction while maintaining original taste preferences.",
+    desc: "Every product is processed to ensure complete consumer satisfaction while maintaining original taste preferences.",
   },
   {
     title: "Market Understanding",
-    desc: "Our success begins with a simple yet powerful principle — understanding our consumers deeply.",
+    desc: "Our success begins with a simple yet powerful principle - understanding our consumers deeply.",
   },
   {
     title: "Scientific Innovation",
-    desc: "Combining scientific innovation with market understanding to create and deliver products, systems, and services.",
+    desc: "Combining scientific innovation with market understanding to create and deliver products suitable to customer demands.",
   },
   {
     title: "Authenticity",
-    desc: "Fulfilling both expressed and unexpressed needs for purity, quality, and authenticity in spices, gums, and nuts.",
+    desc: "Fulfilling both expressed and unexpressed needs for purity, quality, and authenticity in agro commodities.",
   },
 ];
 
@@ -126,7 +126,7 @@ export const WHY_US_FEATURES = [
     key: "sourcing",
     label: "Direct Sourcing Network",
     description:
-      "Trusted partnerships with Indonesian farmers and processors to secure premium-quality spices, nuts, and natural gums at their authentic origin.",
+      "Trusted partnerships with Indonesian farmers and processors to secure premium-quality Agro commodities at their authentic origin.",
     tag: "Traceable Origin",
   },
   {

@@ -55,12 +55,16 @@ export default function About() {
             {/* Minimalist stats section (using white/red tones) */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-xl pt-4">
               <div className="rounded-xl border border-red-200 bg-white/70 p-4 text-center">
-                <p className="text-2xl font-semibold text-gray-900">150+</p>
+                <p className="text-2xl font-semibold text-gray-900">15+</p>
                 <p className="mt-1 text-xs text-gray-500">Product SKUs</p>
               </div>
               <div className="rounded-xl border border-red-200 bg-white/70 p-4 text-center">
                 <p className="text-2xl font-semibold text-gray-900">100%</p>
                 <p className="mt-1 text-xs text-gray-500">Verified Sourcing</p>
+              </div>
+              <div className="rounded-xl border border-red-200 bg-white/70 p-4 text-center">
+                <p className="text-2xl font-semibold text-gray-900">500 MT+</p>
+                <p className="mt-1 text-xs text-gray-500">Annual Capacity</p>
               </div>
             </div>
           </div>

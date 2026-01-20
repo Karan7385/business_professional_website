@@ -23,6 +23,7 @@ async function logout_controller(req, res) {
       success: true,
       message: "Logged out successfully.",
     });
+
   } catch (error) {
     console.error("Error in logout_controller:", error);
     return res.status(500).json({

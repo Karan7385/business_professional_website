@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from "react";
 
 function CertificateContinuousBannerBase(props) {
-  const BASE_SERVER_URL = "http://localhost:3000";
+  const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
   const certificates = props.data.map((item) => {
     return {

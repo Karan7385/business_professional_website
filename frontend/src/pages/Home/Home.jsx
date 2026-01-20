@@ -1,9 +1,8 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 // ================================= IMPORT COMPONENTS =============================================================
 
-import Navbar from "../../components/Navbar.jsx";
 import Carousel from "../../components/home/Carousel.jsx";
 import About from "../../components/home/About.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -13,7 +12,7 @@ import ProductVerticalSlider from "../../components/home/ProductVerticalSlider.j
 import CertificateSlider from "../../components/home/CertificateSlider.jsx";
 import LogoLoader from "../../components/LogoLoader";
 
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 // ================================= ANIMATED DIV ============================================================
 
@@ -43,7 +42,7 @@ function Home() {
   const [productData, setProductData] = useState([]);
   const [certificateData, setCertificateData] = useState([]);
 
-  const BASE_SERVER_URL = "http://localhost:3000";
+  const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
   useEffect(() => {
     const fetchHomeData = async () => {
@@ -60,8 +59,8 @@ function Home() {
         setJumbotronData(jumbotronRes.data.data);
         setCarouselData(carouselRes.data.data);
         setTabData(tabRes.data.data);
-        setProductData(productRes.data.data)
-        setCertificateData(certificateRes.data.data)
+        setProductData(productRes.data.data);
+        setCertificateData(certificateRes.data.data);
         
       } catch (error) {
         toast.error("Error fetching home data:");
@@ -109,8 +108,6 @@ function Home() {
 
   return (
     <>
-      <Toaster position="top-right" toastOptions={{ duration: 8000 }} />
-
       {isLoading ? (
         <LogoLoader />
       ) : (

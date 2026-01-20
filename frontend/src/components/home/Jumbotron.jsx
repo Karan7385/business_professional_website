@@ -1,17 +1,14 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
-// This image will come from server and this is default image
-// import ExportImage from "../../assets/images/exportImages.jpg";
-
-const BASE_SERVER_URL = "http://localhost:3000/";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 // =================== COMPONENT ===================
 
 function JumbotronBase(props) {
 
   const JUMBOTRON_CONTENT = {
-    backgroundImageUrl: BASE_SERVER_URL + props.data.background_image,
+    backgroundImageUrl: BASE_SERVER_URL + "/" + props.data.background_image,
     backgroundAlt: props.data.alt,
     title: props.data.title,
     intro: (
@@ -26,7 +23,7 @@ function JumbotronBase(props) {
     ),
     primaryCta: {
       label: "Explore Our Products",
-      to: "/products",
+      to: "/all-products",
     },
     secondaryCta: {
       label: "Learn More About PT INDO",

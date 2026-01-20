@@ -6,6 +6,7 @@ function get_carousel_home_model() {
     return pool.execute(query);
 }
 
+
 function edit_carousel_home_model(items = []) {
     const queryWithSrc = `
         UPDATE slides_home

@@ -1,16 +1,15 @@
-import React, {
+import {
   useEffect,
   useState,
   useMemo,
   useCallback,
 } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 import {
-  PRODUCTS,
   SPICE_PAGE_COPY,
   SPICE_THEME,
 } from "../../data/productConfig";
@@ -21,7 +20,7 @@ import ProductFiltersBar from "../../components/products/ProductFiltersBar";
 
 const { primary, backgroundClasses } = SPICE_THEME;
 
-function Product({ products = PRODUCTS }) {
+function Product({ products }) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -166,10 +165,13 @@ function Product({ products = PRODUCTS }) {
                 className="text-3xl md:text-4xl font-extrabold tracking-tight sanchez-regular"
                 style={{ color: primary }}
               >
-                {SPICE_PAGE_COPY.title}
+                <Link to="/all-products">
+                  {SPICE_PAGE_COPY.title}
+                </Link>
               </h1>
+              
               <p className="mt-2 text-sm md:text-base text-[#4B2B2B] max-w-xl">
-                {SPICE_PAGE_COPY.description}
+                Your search results for "{search}"
               </p>
             </div>
 

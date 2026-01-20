@@ -3,8 +3,13 @@ import LogoSrc from "../assets/logos/logo.png";
 
 import InstaLogo from "../assets/logos/insta-logo.png";
 import FbLogo from "../assets/logos/fb-logo.png";
-import WhatsappLogo from "../assets/logos/whatsapp-logo.png";
 import LinkedinLogo from "../assets/logos/linkedin-logo.png";
+
+// const socialLinksData = [
+//   { icon: InstaLogo, href: "https://www.instagram.com/ptindobusinessexports/" },
+//   { icon: FbLogo, href: "https://www.facebook.com/profile.php?id=61585662482234" },
+//   { icon: LinkedinLogo, href: "https://www.linkedin.com/company/ptindo-business-exports/" },
+// ];
 
 function Footer() {
   return (
@@ -64,65 +69,78 @@ function Footer() {
               </h3>
 
               <ul className="space-y-3 text-sm sanchez-regular">
-                <li>
-                  <a
-                    href="tel:+9173859844164"
-                    className="inline-flex items-center gap-3 px-2 py-1 rounded-md hover:bg-amber-50 transition"
-                  >
-                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-[#ffb57b] to-[#ff8a3c] shadow-sm">
-                      <svg
-                        className="w-4 h-4 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        aria-hidden
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3 5.25A3.25 3.25 0 0 1 6.25 2h.5a2 2 0 0 1 1.98 1.605l.36 1.66a2 2 0 0 1-.49 1.77l-1.02 1.02a15.056 15.056 0 0 0 6.586 6.586l1.02-1.02a2 2 0 0 1 1.77-.49l1.66.36A2 2 0 0 1 22 17.25v.5A3.25 3.25 0 0 1 18.75 21h-.5A17.75 17.75 0 0 1 3 5.25z"
-                        />
-                      </svg>
-                    </span>
+                <div className="flex">
+                  <li>
+                    <div className="flex items-start gap-3 px-3 py-2 rounded-md hover:bg-amber-50 transition">
 
-                    <div className="text-left text-xs text-[#5b2f2f]">
-                      +91 73859 844164
+                      {/* Icon */}
+                      <span className="inline-flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-gradient-to-tr from-[#ffb57b] to-[#ff8a3c] shadow-sm">
+                        <svg
+                          className="w-4 h-4 text-white"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          aria-hidden
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 5.25A3.25 3.25 0 0 1 6.25 2h.5a2 2 0 0 1 1.98 1.605l.36 1.66a2 2 0 0 1-.49 1.77l-1.02 1.02a15.056 15.056 0 0 0 6.586 6.586l1.02-1.02a2 2 0 0 1 1.77-.49l1.66.36A2 2 0 0 1 22 17.25v.5A3.25 3.25 0 0 1 18.75 21h-.5A17.75 17.75 0 0 1 3 5.25z"
+                          />
+                        </svg>
+                      </span>
+
+                      {/* Text Content */}
+                      <div className="flex flex-col text-xs text-[#5b2f2f] leading-relaxed">
+                        <span className="font-medium">
+                          Indonesia:
+                        </span>
+                        <span>+62 82338 515405</span>
+                        <span>+62 85926 424213</span>
+                      </div>
+
                     </div>
-                  </a>
-                </li>
+                  </li>
+                </div>
+                <div className="flex">
+                  <li>
+                    <div className="flex items-start gap-3 px-3 py-2 rounded-md hover:bg-amber-50 transition">
 
-                <li>
-                  <a
-                    href="tel:+6285926424213"
-                    className="inline-flex items-center gap-3 px-2 py-1 rounded-md hover:bg-amber-50 transition"
-                  >
-                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-[#ffd29b] to-[#ffb57b] shadow-sm">
-                      <svg
-                        className="w-4 h-4 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        aria-hidden
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z"
-                        />
-                      </svg>
-                    </span>
+                      {/* Icon */}
+                      <span className="inline-flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-gradient-to-tr from-[#ffb57b] to-[#ff8a3c] shadow-sm">
+                        <svg
+                          className="w-4 h-4 text-white"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          aria-hidden
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 5.25A3.25 3.25 0 0 1 6.25 2h.5a2 2 0 0 1 1.98 1.605l.36 1.66a2 2 0 0 1-.49 1.77l-1.02 1.02a15.056 15.056 0 0 0 6.586 6.586l1.02-1.02a2 2 0 0 1 1.77-.49l1.66.36A2 2 0 0 1 22 17.25v.5A3.25 3.25 0 0 1 18.75 21h-.5A17.75 17.75 0 0 1 3 5.25z"
+                          />
+                        </svg>
+                      </span>
 
-                    <div className="text-left text-xs text-[#5b2f2f]">
-                      +62 859-2642-4213
+                      {/* Text Content */}
+                      <div className="flex flex-col text-xs text-[#5b2f2f] leading-relaxed">
+                        <span className="font-medium">
+                          India:
+                        </span>
+                        <span>+91 73859 84164</span>
+                        <span>+91 85528 81888</span>
+                      </div>
+
                     </div>
-                  </a>
-                </li>
+                  </li>
+                </div>
 
                 <li>
                   <a
-                    href="mailto:karanvishwakarma7385@gmail.com"
+                    href="mailto:amit@ptindobusiness.com"
                     className="inline-flex items-center gap-3 px-2 py-1 rounded-md hover:bg-amber-50 transition"
                   >
                     <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-[#ffd8b8] to-[#ffd29b] shadow-sm">
@@ -148,7 +166,7 @@ function Footer() {
                     </span>
 
                     <div className="text-left text-xs text-[#5b2f2f] break-all">
-                      indobusinessexports@gmail.com
+                      info@ptindobusiness.com
                     </div>
                   </a>
                 </li>
@@ -161,7 +179,7 @@ function Footer() {
                 Catalog
               </h3>
               <Link
-                to="/brochure.pdf"
+                to="file:///C:/Users/KARAN%20VISHWAKARMA/Downloads/PT%20INDO%20BUSINESS%20CATALOGUE.pdf"
                 className="
                   inline-flex items-center gap-2
                   px-3 py-2 rounded-full sanchez-regular
@@ -190,11 +208,13 @@ function Footer() {
                   Registered Office
                 </h3>
                 <address className="not-italic text-xs text-[#4b2a2a] max-w-[18rem] sanchez-regular">
-                  JALAN MARGOMULYO 46 BLOCK H-13
+                  JALAN MARGOMULYO 46 BLOK H-13
                   <br />
-                  ALAMAT BARU: JALAN MARGOMULYO 46 BLOCK H-12A
+                  (ALAMAT BARU: JALAN MARGOMULYO 46 BLOCK H-12A), 
                   <br />
-                  SURABAYA, Maharashtra, India 400020
+                  DESA/ KELURAHAN - ASEM ROWO, KEC. ASEM ROWO, KOTA SURABAYA,
+                  <br />
+                  PROVINSI JAWA TIMUR, KODE POS 60178, INDONESIA
                 </address>
               </div>
             </div>
@@ -209,11 +229,11 @@ function Footer() {
             </div>
 
             <div className="flex items-center justify-center gap-3">
-              {[InstaLogo, FbLogo, WhatsappLogo, LinkedinLogo].map(
+              {/* {socialLinksData.map(
                 (icon, i) => (
                   <a
                     key={i}
-                    href="#"
+                    href={icon.href}
                     aria-label={`social-${i}`}
                     className="
                       inline-flex items-center justify-center
@@ -224,18 +244,15 @@ function Footer() {
                     "
                   >
                     <img
-                      src={icon}
+                      src={icon.icon}
                       alt={`social-${i}`}
                       className="w-6 h-6 object-contain"
                     />
                   </a>
                 )
-              )}
+              )} */}
+              <p className="text-2xs">Developed by <b>DevWithKaran</b></p>
             </div>
-          </div>
-          
-          <div className="text-2xs text-[#5b2f2f] text-center md:text-right mt-2">
-            Developed by <span className="font-bold">KARAN VISHWAKARMA</span>
           </div>
 
         </div>

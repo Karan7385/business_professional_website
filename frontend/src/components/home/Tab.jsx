@@ -128,14 +128,14 @@ function TabBase(props) {
           >
             <dl className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6">
               {STAT_ITEMS.map((item, index) => (
-                <div key={index} className="flex flex-col">
+                (<div key={index} className="flex flex-col">
                   <dt className="text-2xl font-semibold text-amber-900 sanchez-regular">
                     {item.title}
                   </dt>
                   <dd className="text-sm text-gray-600 unbounded-subHeading">
                     {item.desc}
                   </dd>
-                </div>
+                </div>)
               ))}
             </dl>
           </div>

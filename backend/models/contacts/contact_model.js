@@ -11,9 +11,10 @@ function submit_contact_model(items) {
 
 
 function get_enquiries_model() {
-    const query = `SELECT * FROM enquiries`;
+    const query = `SELECT * FROM enquiries ORDER BY created_at DESC`;
     return pool.execute(query);
 }
+
 
 function update_enquiry_model(id) {
     const query = `UPDATE enquiries SET status = ? WHERE id = ?`;

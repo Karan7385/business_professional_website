@@ -6,12 +6,12 @@ import Logo from "../../assets/logos/logo.png";
 import DashboardPage from "../pages/DashboardPage";
 import EnquiriesPage from "../pages/EnquiriesPage";
 import HomePage from "../pages/HomePage";
-import AboutPage from "../pages/AboutPage";
 import ProductsPage from "../pages/ProductsPage";
 import CertificatesPage from "../pages/CertificatesPage";
+import PreferencePage from "../pages/PreferencePage";
 
 import axios from "axios";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 // =========================== IMPORT PAGES ============================================
@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 // ======================== = CONSTANTS =================================
 
-const BASE_SERVER_URL = "http://localhost:3000";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 // ======================== = CONSTANTS =================================
 
@@ -155,6 +155,7 @@ const navItems = [
   // { key: "about", label: "About", icon: InfoIcon, component: AboutPage },
   { key: "products", label: "Products", icon: CollectionIcon, component: ProductsPage },
   { key: "certificates", label: "Certificates", icon: DocumentIcon, component: CertificatesPage },
+  { key: "preferences", label: "Preferences", icon: DocumentIcon, component: PreferencePage },
 ];
 
 // -----------------------------SIDEBAR CONFIG (component-based, no routing) =============================
@@ -468,8 +469,6 @@ export default function AdminLayout() {
           </div>
         </main>
       </div>
-
-      <Toaster position="top-right" />
     </div>
   );
 }

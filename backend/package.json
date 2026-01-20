@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "pt-indo-business-exports-backend",
   "version": "1.0.0",
-  "description": "PT INDO BUSINESS EXPORTS",
+  "description": "Backend server for PT Indo Business Exports website with authentication, file uploads, email notifications and CRUD operations for products, certificates and some website content.",
   "main": "index.js",
   "type": "module",
   "scripts": {

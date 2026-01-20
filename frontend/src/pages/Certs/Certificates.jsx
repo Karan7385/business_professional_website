@@ -1,13 +1,13 @@
-import React, { useEffect, useState, memo } from "react";
+import { useEffect, useState, memo } from "react";
 import axios from "axios";
-import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import CertificatesGallery from "../../components/certificates/CertificatesGallery";
 import {
   CERT_API_URL,
   CERT_HERO_CONTENT,
-  CERT_STATS_TAGS,
 } from "../../data/certificatesConfig";
+
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 const CertificatesHero = memo(function CertificatesHero({
   mounted,
@@ -105,10 +105,10 @@ export function Certificates() {
           // prepend host if backend sends relative paths
           src: item.src?.startsWith("http")
             ? item.src
-            : `http://localhost:3000${item.src}`,
+            : `${BASE_SERVER_URL}${item.src}`,
           logo: item.logo?.startsWith("http")
             ? item.logo
-            : `http://localhost:3000${item.logo}`,
+            : `${BASE_SERVER_URL}${item.logo}`,
           category: item.category,
           color: item.color,
         }));

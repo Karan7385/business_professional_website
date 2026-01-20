@@ -9,11 +9,11 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import axios from "axios";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 // =================================== CONSTANTS ========================================
 
-const BASE_SERVER_URL = "http://localhost:3000";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 // =================================== CONSTANTS ========================================
 
@@ -37,6 +37,7 @@ const initialFormState = {
   stems: "",
   size: "",
   port_of_loading: "",
+  additional_info: "",
 };
 
 // ======================== Initial state for the product form ===================================
@@ -109,6 +110,7 @@ export default function ProductsPage() {
       stems: product.stems || "",
       size: product.size || "",
       port_of_loading: product.port_of_loading || "",
+      additional_info: product.additional_info || "",
     });
 
     setExistingImages(product.images || []);
@@ -202,6 +204,7 @@ export default function ProductsPage() {
       formData.append("stems", form.stems);
       formData.append("size", form.size);
       formData.append("port_of_loading", form.port_of_loading);
+      formData.append("additional_info", form.additional_info);
 
 
       // packaging: convert comma-separated string into JSON array
@@ -326,7 +329,7 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-white/60 via-amber-50/40 to-orange-50/40 backdrop-blur">
-      <Toaster />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
@@ -844,7 +847,7 @@ export default function ProductsPage() {
                 </div>
 
                 <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <FormInput
+                  {/* <FormInput
                     name="stems"
                     label="Stems %"
                     value={form.stems}
@@ -857,7 +860,7 @@ export default function ProductsPage() {
                     value={form.size}
                     onChange={handleInputChange}
                     placeholder="9mm to 12mm"
-                  />
+                  /> */}
                   <FormInput
                     name="port_of_loading"
                     label="Port of Loading"
@@ -894,6 +897,20 @@ export default function ProductsPage() {
                   <textarea
                     name="description"
                     value={form.description}
+                    onChange={handleInputChange}
+                    rows={5}
+                    className="w-full rounded-xl border border-amber-200 bg-white/90 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/60 focus:border-amber-300 transition resize-y sanchez-regular"
+                  />
+                </div>
+                
+                {/* Additional info */}
+                <div className="md:col-span-2 hidden">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1 unbounded-heading">
+                    Additional information
+                  </label>
+                  <textarea
+                    name="additional_info"
+                    value={form.additional_info}
                     onChange={handleInputChange}
                     rows={5}
                     className="w-full rounded-xl border border-amber-200 bg-white/90 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/60 focus:border-amber-300 transition resize-y sanchez-regular"

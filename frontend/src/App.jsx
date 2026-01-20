@@ -2,11 +2,14 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 // Pages
-import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
-import { Certificates } from "./pages/Certs/Certificates";
-import Product from "./pages/Products/Product";
+import Home from "./pages/Home/Home.jsx";
+import About from "./pages/About/About.jsx";
+import { Certificates } from "./pages/Certs/Certificates.jsx";
+import Contact from "./components/Contact.jsx";
+import Product from "./pages/Products/Product.jsx";
+import AllProducts from "./components/products/AllProducts.jsx";
 
 // Admin
 import LoginPage from "./admin/LoginPage";
@@ -17,7 +20,11 @@ import ProtectedRoute from "./admin/components/auth/ProtectedRoute";
 import NavbarA from "./components/Navbar.jsx";
 import ContactModalContext from "./context/ContactModalContext.jsx";
 
+import { Toaster } from "react-hot-toast";
+
 /* ================= WRAPPER ================= */
+
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 function AppContent() {
   const location = useLocation();
@@ -37,7 +44,7 @@ function AppContent() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/products");
+        const res = await axios.get(`${BASE_SERVER_URL}/api/products`);
         setProductData(res.data.data || []);
       } catch (error) {
         console.error("Failed to fetch products", error);
@@ -50,44 +57,66 @@ function AppContent() {
   }, []);
 
   return (
-    <ContactModalContext.Provider
-      value={{
-        openContactModal: () => setOpenModal(true),
-      }}
-    >
-      {/* ✅ Navbar only for public pages */}
-      {!hideNavbar && (
-        <NavbarA openModal={openModal} setOpenModal={setOpenModal} />
-      )}
+    <>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 8000,
+          style: {
+            fontSize: "14px",
+          },
+        }}
+      />
 
-      <Routes>
-        {/* Public Pages */}
-        <Route path="/" element={<Home products={productData} />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/certs" element={<Certificates />} />
-        <Route
-          path="/products"
-          element={
-            <Product
-              products={productData}
-              isLoading={loadingProducts}
-            />
-          }
-        />
+      <ContactModalContext.Provider
+        value={{
+          openContactModal: () => setOpenModal(true),
+          products: productData,
+        }}
+      >
+        {/* ✅ Navbar only for public pages */}
+        {!hideNavbar && (
+          <NavbarA openModal={openModal} setOpenModal={setOpenModal} />
+        )}
 
-        {/* Admin */}
-        <Route path="/login" element={<LoginPage />} />
+        <Routes>
+          {/* Public Pages */}
+          <Route path="/" element={<Home products={productData} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/certs" element={<Certificates />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/products"
+            element={
+              <Product
+                products={productData}
+                isLoading={loadingProducts}
+              />
+            }
+          />
+          <Route
+            path="/all-products"
+            element={
+              <AllProducts
+                products={productData}
+              />
+            }
+          />
 
-        <Route
-          path="/admin/*"
-          element={
-            <ProtectedRoute>
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </ContactModalContext.Provider>
+          {/* Admin */}
+          <Route path="/login" element={<LoginPage />} />
+
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </ContactModalContext.Provider>
+    </>
   );
 }
 

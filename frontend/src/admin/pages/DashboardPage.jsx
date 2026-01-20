@@ -40,6 +40,8 @@ const PIE_COLORS = [
   "#fc00ff", "#ff00fc", "#ff00f5", "#ff00ed", "#ff00e6"
 ];
 
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
+
 const DashboardPage = () => {
   const [enquiries, setEnquiries] = useState([]);
   const [enquiriesByCategory, setEnquiriesByCategory] = useState([]);
@@ -50,10 +52,10 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const enqRes = await axios.get(
-        "http://localhost:3000/api/contact/list-enquiries"
+        `${BASE_SERVER_URL}/api/contact/list-enquiries`
       );
 
-      const logRes = await axios.get("http://localhost:3000/api/logs/get-logs");
+      const logRes = await axios.get(`${BASE_SERVER_URL}/api/logs/get-logs`);
       const data = enqRes.data.data;
 
       // --------- Activity Log: format date+time and sort newest → oldest ----------

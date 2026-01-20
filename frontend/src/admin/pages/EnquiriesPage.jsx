@@ -2,11 +2,11 @@ import { useEffect, useState, Fragment, useMemo } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import * as XLSX from "xlsx";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 // ======================== CONSTANTS =================================
 
-const BASE_SERVER_URL = "http://localhost:3000";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 const LIST_API_URL = `${BASE_SERVER_URL}/api/contact/list-enquiries`;
 const UPDATE_STATUS_API_URL = (id) =>
   `${BASE_SERVER_URL}/api/contact/enquiries/${id}/status`;
@@ -641,8 +641,6 @@ export default function EnquiriesPage() {
           </motion.div>
         </motion.div>
       </div>
-
-      <Toaster position="top-right" />
     </>
   );
 }

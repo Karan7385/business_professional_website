@@ -3,8 +3,7 @@ import bcrypt from "bcrypt";
 import getUserByUsername from "../../models/auth/authentication_model.js";
 import { create_logs } from "../../models/logs/logs_model.js";
 
-// How long access tokens are valid
-const ACCESS_TOKEN_EXPIRES_IN = "1d"; // 1 day
+const ACCESS_TOKEN_EXPIRES_IN = "1d";
 
 async function login_controller(req, res) {
     try {
@@ -15,7 +14,7 @@ async function login_controller(req, res) {
         if (!user) {
             return res
                 .status(401)
-                .json({ error: "Invalid username or password." });
+                .json({ success: false, message: "Invalid username or password." });
         }
 
         // ---- Compare password safely ----
@@ -23,7 +22,7 @@ async function login_controller(req, res) {
         if (!passwordMatches) {
             return res
                 .status(401)
-                .json({ error: "Invalid username or password." });
+                .json({ success: false, message: "Invalid username or password." });
         }
 
         // ---- Build JWT payload (keep it small) ----
@@ -60,6 +59,7 @@ async function login_controller(req, res) {
 
         // Return some basic info (WITHOUT password/hash)
         return res.status(200).json({
+            success: true,
             message: "Login successful.",
             token,
         });
@@ -67,7 +67,7 @@ async function login_controller(req, res) {
         console.error("Error in login_controller:", error);
         return res
             .status(500)
-            .json({ error: "Something went wrong while logging in." });
+            .json({ success: false, message: "Something went wrong while logging in." });
     }
 }
 

@@ -1,4 +1,5 @@
-export const CERT_API_URL = "http://localhost:3000/api/certs";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
+export const CERT_API_URL = `${BASE_SERVER_URL}/api/certs`;
 
 export const CERT_HERO_CONTENT = {
   eyebrow: "Globally Recognized Standards",

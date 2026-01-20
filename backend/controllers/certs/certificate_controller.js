@@ -43,11 +43,11 @@ async function saveUploadedFile(file, subfolder = "") {
   return `/uploads/certificates/${fileName}`;
 }
 
+
 // Helper: delete file from disk if it exists
 async function deleteFileIfExists(srcPath) {
   if (!srcPath) return;
 
-  // srcPath stored in DB probably looks like: /uploads/certificates/xxx.ext
   const normalized = srcPath.startsWith("/")
     ? srcPath.slice(1)
     : srcPath;
@@ -58,10 +58,16 @@ async function deleteFileIfExists(srcPath) {
     if (fs.existsSync(fullPath)) {
       await fs.promises.unlink(fullPath);
     }
+
   } catch (err) {
     console.error("Error deleting file:", fullPath, err);
+    res.json({
+      success: false,
+      message: "Error deleting file",
+    });
   }
 }
+
 
 // GET /api/certs
 async function get_certificates(req, res) {
@@ -84,15 +90,14 @@ async function get_certificates(req, res) {
   }
 }
 
+
 // POST /api/certs  (Create)
 async function create_certificate(req, res) {
   const { title, issuer, year, category, color } = req.body;
   const files = req.files || {};
 
-  const certificateFile =
-    files.src && files.src[0] ? files.src[0] : null;
-  const logoFile =
-    files.logo && files.logo[0] ? files.logo[0] : null;
+  const certificateFile = files.src && files.src[0] ? files.src[0] : null;
+  const logoFile = files.logo && files.logo[0] ? files.logo[0] : null;
 
   if (!title || !issuer || !year || !category || !color) {
     // clean up temp files
@@ -173,16 +178,15 @@ async function create_certificate(req, res) {
   }
 }
 
+
 // PUT /api/certs/:id  (Update)
 async function update_certificate(req, res) {
   const { id } = req.params;
   const { title, issuer, year, category, color } = req.body;
   const files = req.files || {};
 
-  const certificateFile =
-    files.src && files.src[0] ? files.src[0] : null;
-  const logoFile =
-    files.logo && files.logo[0] ? files.logo[0] : null;
+  const certificateFile = files.src && files.src[0] ? files.src[0] : null;
+  const logoFile = files.logo && files.logo[0] ? files.logo[0] : null;
 
   if (!id || !title || !issuer || !year || !category || !color) {
     const allFiles = [certificateFile, logoFile];
@@ -297,6 +301,7 @@ async function update_certificate(req, res) {
     });
   }
 }
+
 
 // DELETE /api/certs/:id
 async function delete_certificate(req, res) {

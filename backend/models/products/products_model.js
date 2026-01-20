@@ -5,10 +5,12 @@ function get_product_model() {
   return pool.execute(query);
 }
 
+
 function get_products_name_model() {
   const query = `SELECT id, name FROM products`;
   return pool.execute(query);
 }
+
 
 function get_categories_name_model() {
   const query = `
@@ -22,7 +24,7 @@ function get_categories_name_model() {
   return pool.execute(query);
 }
 
-// id is passed separately for clarity
+
 function edit_product_model(id, items = {}) {
   const query = `
     UPDATE products
@@ -43,7 +45,8 @@ function edit_product_model(id, items = {}) {
       colour = ?,
       stems = ?,
       size = ?,
-      port_of_loading = ?
+      port_of_loading = ?,
+      additional_info = ?
 
     WHERE id = ?
   `;
@@ -66,12 +69,14 @@ function edit_product_model(id, items = {}) {
     items.stems,
     items.size,
     items.port_of_loading,
+    items.additional_info,
 
     id,
   ];
 
   return pool.execute(query, params);
 }
+
 
 function create_product_model(items = {}) {
   const query = `
@@ -93,9 +98,10 @@ function create_product_model(items = {}) {
       colour,
       stems,
       size,
-      port_of_loading
+      port_of_loading,
+      additional_info
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
@@ -116,10 +122,12 @@ function create_product_model(items = {}) {
     items.stems,
     items.size,
     items.port_of_loading,
+    items.additional_info,
   ];
 
   return pool.execute(query, params);
 }
+
 
 function delete_product_model(id) {
   const query = `DELETE FROM products WHERE id = ?`;

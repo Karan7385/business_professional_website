@@ -38,7 +38,7 @@ CREATE TABLE `tabs_service_items` (
 
 LOCK TABLES `tabs_service_items` WRITE;
 /*!40000 ALTER TABLE `tabs_service_items` DISABLE KEYS */;
-INSERT INTO `tabs_service_items` VALUES (1,'Premium Spices & Herbs Export','High-grade turmeric, cumin, coriander, cloves, black pepper, cardamom, ginger, chilli, basil leaves and more.','2025-12-02 13:17:20','2025-12-02 13:17:20'),(2,'Natural Gums & Resins Supply','Export of Gum Arabic, Tragacanth, Indian gum varieties and other natural stabilizers.','2025-12-02 13:17:20','2025-12-02 13:17:20'),(3,'Dry Fruits & Agro Commodities','Cashews, figs, raisins, dates and multiple dry fruit varieties sourced from trusted growers.','2025-12-02 13:17:20','2025-12-02 13:17:20'),(4,'Custom Packaging & Bulk Orders','Private labelling, export-ready packaging and bulk industrial supply solutions.','2025-12-02 13:17:20','2025-12-02 13:17:20');
+INSERT INTO `tabs_service_items` VALUES (1,'Premium Spices & Herbs Export','High-grade premium spices, herbs, gums, and natural oils of agro commodities and more.','2025-12-02 13:17:20','2025-12-26 07:37:50'),(2,'White Label','Empowering your brand with customized white-labelling solution for your products.','2025-12-02 13:17:20','2025-12-26 07:37:50'),(3,'Trusted Supplies','Delivering Quality as your reliable and trusted supplier from Indonesia.','2025-12-02 13:17:20','2025-12-26 07:37:50'),(4,'Empower Local Farmers','Supporting local farmers through fair trade, sustainable sourcing & long term partnership.','2025-12-02 13:17:20','2025-12-26 07:37:50');
 /*!40000 ALTER TABLE `tabs_service_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-13  5:02:33
+-- Dump completed on 2026-01-21  1:24:57

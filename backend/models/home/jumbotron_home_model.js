@@ -1,12 +1,6 @@
 import pool from "../../config/db.js";
 
-async function edit_home_jumbotron_model(
-  backgroundAlt,
-  body,
-  intro,
-  title,
-  backgroundImagePath
-) {
+async function edit_home_jumbotron_model(backgroundAlt, body, intro, title, backgroundImagePath) {
   const query = `
     UPDATE home_jumbotron
     SET background_alt = ?, body = ?, intro = ?, title = ?, background_image = ?
@@ -16,6 +10,7 @@ async function edit_home_jumbotron_model(
 
   return pool.execute(query, values);
 }
+
 
 async function get_home_jumbotron_model() {
   const query = `SELECT * FROM home_jumbotron WHERE id = 1`;

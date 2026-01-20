@@ -9,7 +9,6 @@ import {
 
 import { create_logs } from "../../models/logs/logs_model.js";
 
-// GET /api/home/jumbotron/get
 async function get_jumbotron_controller(req, res) {
   try {
     const [rows] = await get_home_jumbotron_model();
@@ -17,11 +16,6 @@ async function get_jumbotron_controller(req, res) {
     if (!rows || rows.length === 0) {
       return res.status(404).json({ message: "Jumbotron data not found." });
     }
-
-    console.log("============= JUMBOTRON ===============");
-    console.log(rows);
-    console.log("============= JUMBOTRON ===============");
-    
 
     return res.status(200).json({ data: rows[0] });
   } catch (err) {
@@ -45,7 +39,7 @@ async function edit_jumbotron_controller(req, res) {
         console.error("Error removing temp file on validation failure:", err);
       }
     }
-    return res.status(400).json({ message: "All text fields are required." });
+    return res.status(400).json({ success: false, message: "All text fields are required." });
   }
 
   try {
@@ -70,7 +64,7 @@ async function edit_jumbotron_controller(req, res) {
       if (!backgroundImageFile.path) {
         return res
           .status(500)
-          .json({ message: "File upload failed: missing temp path." });
+          .json({ success: false, message: "File upload failed: missing temp path." });
       }
 
       // Remove existing file if present
@@ -102,7 +96,7 @@ async function edit_jumbotron_controller(req, res) {
     if (!updateResult || updateResult.affectedRows === 0) {
       return res
         .status(500)
-        .json({ message: "Failed to update jumbotron in database." });
+        .json({ success: false, message: "Failed to update jumbotron in database." });
     }
 
     create_logs(
@@ -112,10 +106,10 @@ async function edit_jumbotron_controller(req, res) {
 
     return res
       .status(200)
-      .json({ message: "Jumbotron updated successfully.", data: { backgroundAlt, body, intro, title, background_image: relativeFilePath } });
+      .json({ success: true, message: "Jumbotron updated successfully.", data: { backgroundAlt, body, intro, title, background_image: relativeFilePath } });
   } catch (err) {
     console.error("Error updating jumbotron:", err);
-    return res.status(500).json({ message: "Failed to update jumbotron." });
+    return res.status(500).json({ success: false, message: "Failed to update jumbotron." });
   }
 }
 

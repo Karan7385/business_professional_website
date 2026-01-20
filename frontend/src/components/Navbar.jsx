@@ -12,7 +12,7 @@ import LinkedinLogo from "../assets/logos/linkedin-logo.png";
 import ContactModal from "../components/ContactModal.jsx";
 
 export default function NavbarA({ openModal, setOpenModal }) {
-  const BASE_SERVER_URL = "http://localhost:3000";
+  const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
   /* ================= AUTO OPEN LOGIC ================= */
 
@@ -37,8 +37,8 @@ export default function NavbarA({ openModal, setOpenModal }) {
         if (!modalOpenRef.current) {
           setOpenModal(true);
         }
-      }, 120_000);
-    }, 30_000);
+      }, 60_000);
+    }, 300_000);
 
     return () => {
       if (firstTimeoutRef.current) clearTimeout(firstTimeoutRef.current);
@@ -55,17 +55,81 @@ export default function NavbarA({ openModal, setOpenModal }) {
   const [prodData, setProdData] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [openButton, setOpenButton] = useState(false);
+  const [openWhatsapp, setOpenWhatsapp] = useState(false);
 
 
   const location = useLocation();
   const navbarRef = useRef(null);
 
-  const socialLinks = [
-    { icon: InstaLogo, href: "/instagram" },
-    { icon: FbLogo, href: "/facebook" },
-    { icon: WhatsappLogo, href: "/whatsapp" },
-    { icon: LinkedinLogo, href: "/linkedin" },
+  // const socialLinks = [
+  //   {
+  //     name: "Instagram",
+  //     icon: InstaLogo,
+  //     href: "/instagram",
+  //   },
+  //   {
+  //     name: "Facebook",
+  //     icon: FbLogo,
+  //     href: "https://www.facebook.com/profile.php?id=61585662482234",
+  //   },
+  //   {
+  //     name: "LinkedIn",
+  //     icon: LinkedinLogo,
+  //     href: "/linkedin",
+  //   },
+  //   {
+  //     name: "WhatsApp",
+  //     icon: WhatsappLogo,
+  //     type: "whatsapp", // 👈 important
+  //     options: [
+  //       {
+  //         label: "Sales Team",
+  //         short: "ST",
+  //         href: "https://wa.me/6285926424213?text=Hello%20I%20want%20to%20connect%20with%20Sales",
+  //       },
+  //       {
+  //         label: "Operational Team",
+  //         short: "OT",
+  //         href: "https://wa.me/6282338515405?text=Hello%20I%20need%20Support",
+  //       },
+  //     ],
+  //   },
+  // ];
+
+  const navbarSocialLinks = [
+    {
+      name: "Instagram",
+      icon: InstaLogo,
+      href: "/instagram",
+    },
+    {
+      name: "Facebook",
+      icon: FbLogo,
+      href: "https://www.facebook.com/profile.php?id=61585662482234",
+    },
+    {
+      name: "LinkedIn",
+      icon: LinkedinLogo,
+      href: "/linkedin",
+    },
   ];
+
+  const whatsappLink = {
+    icon: WhatsappLogo,
+    options: [
+      {
+        label: "Sales Team",
+        short: "ST",
+        href: "https://wa.me/6285926424213?text=Hello%20I%20want%20to%20connect%20with%20Sales",
+      },
+      {
+        label: "Operational Team",
+        short: "OT",
+        href: "https://wa.me/6282338515405?text=Hello%20I%20need%20Support",
+      },
+    ],
+  };
 
   useEffect(() => {
     const data = async () => {
@@ -97,12 +161,13 @@ export default function NavbarA({ openModal, setOpenModal }) {
       dropdown: PRODUCT_CATEGORIES,
     },
     { label: "Certificates", path: "/certs" },
+    { label: "Contact", path: "/contact" },
   ];
 
   const handleSubmitContact = async (data) => {
 
     const res = await axios.post(
-      "http://localhost:3000/api/contact/submit-enquiries",
+      `${BASE_SERVER_URL}/api/contact/submit-enquiries`,
       data,
       {
         headers: {
@@ -111,6 +176,7 @@ export default function NavbarA({ openModal, setOpenModal }) {
       }
     );
 
+    return res.data
   };
 
   useEffect(() => {
@@ -162,27 +228,30 @@ export default function NavbarA({ openModal, setOpenModal }) {
                 </div>
               </Link>
 
-              <div className="hidden lg:flex items-center space-x-6">
-                <div className="flex items-center space-x-4">
-                  {socialLinks.map(({ icon, href }, i) => (
-                    <Link
-                      key={i}
-                      to={href}
-                      className="w-10 h-8 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-200 flex items-center justify-center"
-                      aria-label={`Visit our ${href} page`}
-                    >
-                      <img src={icon} alt="" className="w-14 h-8" />
-                    </Link>
-                  ))}
-                </div>
+              <div className="hidden lg:flex items-center space-x-4">
+                {navbarSocialLinks.map((item, i) => (
+                  <Link
+                    key={i}
+                    to={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="w-9 h-9 rounded-full bg-white/70 flex items-center justify-center
+                 hover:scale-110 transition shadow-sm"
+                  >
+                    <img src={item.icon} alt={item.name} className="w-5 h-5" />
+                  </Link>
+                ))}
 
                 <button
                   onClick={() => setOpenModal(true)}
-                  className="px-6 py-2 text-sm font-semibold text-[#7A1F1F] bg-linear-to-r from-[#EAC97C] to-[#d8b569] hover:bg-linear-to-r hover:from-[#EAC97C] hover:to-[#d8b569] rounded-lg transition-colors duration-200 border border-transparent hover:border-white/30"
+                  className="ml-4 px-6 py-2 text-sm font-semibold text-[#7A1F1F]
+               bg-linear-to-r from-[#EAC97C] to-[#d8b569]
+               rounded-lg transition"
                 >
                   Contact Us
                 </button>
               </div>
+
             </div>
           </div>
         </div>
@@ -568,19 +637,6 @@ export default function NavbarA({ openModal, setOpenModal }) {
                   Certificates
                 </NavLink>
 
-                <div className="flex items-center justify-center space-x-6 pt-6 pb-4">
-                  {[InstaLogo, FbLogo, TwitterLogo, WhatsappLogo, LinkedinLogo].map(
-                    (icon, i) => (
-                      <Link
-                        key={i}
-                        className="w-10 h-8 rounded-lg bg-gray-100 hover:bg-[#EAC97C]/20 transition-all duration-200 flex items-center justify-center"
-                      >
-                        <img src={icon} alt="" className="w-14 h-8" />
-                      </Link>
-                    )
-                  )}
-                </div>
-
                 <button
                   onClick={() => {
                     setOpen(false);
@@ -595,6 +651,41 @@ export default function NavbarA({ openModal, setOpenModal }) {
           )}
         </div>
       </header>
+
+      {/* FLOATING WHATSAPP BUTTON */}
+      <div className="fixed bottom-6 right-6 z-[999]">
+        {/* OPTIONS */}
+        {openWhatsapp && (
+          <div className="absolute bottom-16 right-0 bg-white rounded-xl shadow-xl overflow-hidden">
+            {whatsappLink.options.map((opt, idx) => (
+              <a
+                key={idx}
+                href={opt.href}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpenWhatsapp(false)}
+                className="flex items-center justify-between px-4 py-3 hover:bg-green-50 transition"
+              >
+                <span className="text-sm font-medium text-gray-800">
+                  {opt.label}
+                </span>
+                <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">
+                  {opt.short}
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
+
+        {/* MAIN WHATSAPP BUTTON */}
+        <button
+          onClick={() => setOpenWhatsapp((p) => !p)}
+          className="w-14 h-14 rounded-full bg-green-500 flex items-center
+               justify-center shadow-xl hover:scale-105 transition"
+        >
+          <img src={WhatsappLogo} alt="WhatsApp" className="w-7 h-7" />
+        </button>
+      </div>
 
       <ContactModal
         isOpen={openModal}

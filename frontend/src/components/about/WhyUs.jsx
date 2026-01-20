@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import {
   WHY_US_SECTION,
   WHY_US_FEATURES,
@@ -8,7 +8,6 @@ import {
 function WhyUsBase({ mounted, sectionBase, sectionActive }) {
   const section = WHY_US_SECTION;
   const features = WHY_US_FEATURES;
-  const stats = WHY_US_STATS;
 
   return (
     <>
@@ -197,20 +196,6 @@ function WhyUsBase({ mounted, sectionBase, sectionActive }) {
                 </li>
               ))}
             </ul>
-
-            {/* Stats row */}
-            {/* <div className="grid grid-cols-3 gap-4 rounded-3xl bg-white/40 backdrop-blur-lg border border-white/50 px-4 py-4 sm:px-6 sm:py-5 shadow-md">
-              {stats.map((item) => (
-                <div key={item.label} className="text-left">
-                  <div className="text-lg sm:text-xl font-extrabold text-[#7A1F1F]">
-                    {item.value}
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-[#6B4B3A] leading-snug">
-                    {item.label}
-                  </div>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </section>

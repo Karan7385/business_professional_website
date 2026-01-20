@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { PlusCircle, Award, Trash2, Edit, X, Save } from "lucide-react";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 
-const BASE_SERVER_URL = "http://localhost:3000";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 const CERT_HERO_CONTENT = {
   eyebrow: "Admin Dashboard",
@@ -665,7 +665,6 @@ export default function CertificatesPage() {
 
   return (
     <>
-      <Toaster position="top-right" />
 
       <div className="min-h-screen p-4 sm:p-8 lg:p-12 bg-linear-to-br from-white via-gray-50 to-blue-50">
         <header className="mb-10 p-6 bg-white/90 rounded-xl shadow-lg border border-gray-100 backdrop-blur-sm">

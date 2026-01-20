@@ -17,6 +17,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
 async function handle_submit(req, res) {
   try {
     const {
@@ -32,23 +33,23 @@ async function handle_submit(req, res) {
 
     // Basic validation (you can tighten as needed)
     if (!name || !name.trim()) {
-      return res.status(400).json({ error: "Name is required" });
+      return res.status(400).json({ success: false, message: "Name is required" });
     }
 
     if (!email || !email.trim()) {
-      return res.status(400).json({ error: "Email is required" });
+      return res.status(400).json({ success: false, message: "Email is required" });
     }
 
     if (!message || !message.trim()) {
-      return res.status(400).json({ error: "Message is required" });
+      return res.status(400).json({ success: false, message: "Message is required" });
     }
 
     if (!Array.isArray(categories) || categories.length === 0) {
-      return res.status(400).json({ error: "At least one category is required" });
+      return res.status(400).json({ success: false, message: "At least one category is required" });
     }
 
     if (!Array.isArray(products) || products.length === 0) {
-      return res.status(400).json({ error: "At least one product is required" });
+      return res.status(400).json({ success: false, message: "At least one product is required" });
     }
 
     // Prepare payload for DB (matches your table columns)
@@ -74,58 +75,58 @@ async function handle_submit(req, res) {
       to: adminEmail,
       subject: `New enquiry from ${name}`,
       html: `
-  <div style="max-width: 650px; margin: auto; font-family: Arial, sans-serif; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden;">
-    
-    <div style="background: #007BFF; padding: 20px; color: white;">
-      <h2 style="margin: 0; font-size: 22px;">📩 New Enquiry Received</h2>
-    </div>
+        <div style="max-width: 650px; margin: auto; font-family: Arial, sans-serif; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden;">
+          
+          <div style="background: #007BFF; padding: 20px; color: white;">
+            <h2 style="margin: 0; font-size: 22px;">📩 New Enquiry Received</h2>
+          </div>
 
-    <div style="padding: 20px;">
-      <p style="font-size: 16px; margin: 0 0 12px 0;">
-        A new enquiry has been received from your website. Please review the details below:
-      </p>
+          <div style="padding: 20px;">
+            <p style="font-size: 16px; margin: 0 0 12px 0;">
+              A new enquiry has been received from your website. Please review the details below:
+            </p>
 
-      <table style="width: 100%; border-collapse: collapse; margin-top: 18px;">
-        <tr>
-          <td style="padding: 8px; font-weight: bold;">Name:</td>
-          <td style="padding: 8px;">${name}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; font-weight: bold;">Company:</td>
-          <td style="padding: 8px;">${company || "-"}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; font-weight: bold;">Email:</td>
-          <td style="padding: 8px;">${email}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; font-weight: bold;">Phone:</td>
-          <td style="padding: 8px;">${country_code || ""} ${phone || ""}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; font-weight: bold; vertical-align: top;">Message:</td>
-          <td style="padding: 8px;">${message}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; font-weight: bold;">Categories:</td>
-          <td style="padding: 8px;">${categories.join(", ")}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; font-weight: bold;">Products:</td>
-          <td style="padding: 8px;">${products.join(", ")}</td>
-        </tr>
-      </table>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 18px;">
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Name:</td>
+                <td style="padding: 8px;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Company:</td>
+                <td style="padding: 8px;">${company || "-"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Email:</td>
+                <td style="padding: 8px;">${email}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Phone:</td>
+                <td style="padding: 8px;">${country_code || ""} ${phone || ""}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold; vertical-align: top;">Message:</td>
+                <td style="padding: 8px;">${message}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Categories:</td>
+                <td style="padding: 8px;">${categories.join(", ")}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Products:</td>
+                <td style="padding: 8px;">${products.join(", ")}</td>
+              </tr>
+            </table>
 
-      <p style="margin-top: 26px; font-size: 14px; color: #555;">
-        📌 <strong>Action Required:</strong> Please contact the user as soon as possible.
-      </p>
-    </div>
+            <p style="margin-top: 26px; font-size: 14px; color: #555;">
+              📌 <strong>Action Required:</strong> Please contact the user as soon as possible.
+            </p>
+          </div>
 
-    <div style="background: #f7f7f7; padding: 15px; text-align: center; font-size: 13px; color: #666;">
-      This notification was generated automatically from the website.
-    </div>
-  </div>
-`,
+          <div style="background: #f7f7f7; padding: 15px; text-align: center; font-size: 13px; color: #666;">
+            This notification was generated automatically from the website.
+          </div>
+        </div>
+      `,
     };
 
     const userMailOptions = {
@@ -191,6 +192,7 @@ async function handle_submit(req, res) {
       id: result?.insertId || null,
       message: "Enquiry submitted successfully and emails sent",
     });
+
   } catch (err) {
     console.error("Error in handle_submit:", err);
     return res.status(500).json({
@@ -199,6 +201,7 @@ async function handle_submit(req, res) {
     });
   }
 }
+
 
 async function get_enquiries(req, res) {
   try {
@@ -216,6 +219,7 @@ async function get_enquiries(req, res) {
     });
   }
 }
+
 
 async function update_enquiry_status(req, res) {
   try {

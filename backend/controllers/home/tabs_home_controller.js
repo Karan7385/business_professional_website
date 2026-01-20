@@ -15,17 +15,8 @@ async function get_tabs_controller(req, res) {
     const [service_items] = await get_tabs_service_itmes_model();
     const [faq_items] = await get_tabs_faq_itmes_model();
 
-    console.log("============= TABS ===============");
-    console.log({
-      data: {
-        stats: stats_items,
-        services: service_items,
-        faqs: faq_items
-      }
-    });
-    console.log("============= TABS ===============");
-
     return res.status(200).json({
+      success: true,
       data: {
         stats: stats_items,
         services: service_items,
@@ -35,14 +26,15 @@ async function get_tabs_controller(req, res) {
   } catch (error) {
     console.error(error);
     return res.status(500).json({
+      success: false,
       message: "Failed to load tabs data",
     });
   }
 }
 
+
 async function edit_tabs_controller(req, res) {
   try {
-    console.log(req.body);
     const { stats = [], services = [], faqs = [] } = req.body;
 
     // run updates in parallel
@@ -58,11 +50,13 @@ async function edit_tabs_controller(req, res) {
     )
 
     return res.status(200).json({
+      success: true,
       message: "Tabs updated successfully",
     });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
+      success: false,
       message: "Failed to update tabs data",
     });
   }

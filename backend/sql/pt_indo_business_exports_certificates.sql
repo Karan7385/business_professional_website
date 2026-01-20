@@ -43,7 +43,7 @@ CREATE TABLE `certificates` (
 
 LOCK TABLES `certificates` WRITE;
 /*!40000 ALTER TABLE `certificates` DISABLE KEYS */;
-INSERT INTO `certificates` VALUES (5,'NPWP','NPWP issuer','2025','/uploads/certificates/Admit_Card-1764767239254-766947575.pdf','/uploads/certificates/logos/npwp-1764946199247-292586517.png','Test category','from-stone-200 to-amber-200','2025-12-03 13:07:19','2025-12-05 14:52:20'),(7,'KTP','KTP issuer','2025','/uploads/certificates/Admit_Card-1764946401049-51831143.pdf','/uploads/certificates/logos/ktp-1764946401051-900302962.jpg','SPICE','from-orange-200 to-pink-300','2025-12-05 14:53:21','2025-12-05 14:53:21'),(8,'VAT','VAT issuer','2025','/uploads/certificates/Admit_Card-1764946499009-113189932.pdf','/uploads/certificates/logos/vat-1764946499012-29669045.jpg','SPICE','from-sky-200 to-blue-300','2025-12-05 14:54:59','2025-12-05 14:58:51'),(9,'NIB','NIB issuer','2025','/uploads/certificates/Admit_Card-1764947027902-193858516.pdf','/uploads/certificates/logos/nib-1764947002479-339591416.jpg','SPICE','from-yellow-400 to-amber-600','2025-12-05 15:03:22','2025-12-05 15:03:47');
+INSERT INTO `certificates` VALUES (5,'NPWP','NPWP issuer','2025','/uploads/certificates/NPWP_-_PT_INDO_BUSINESS_EXPORTS_[MARGOMULYO]-1766916803925-13934834.pdf','/uploads/certificates/logos/npwp-1764946199247-292586517.png','Test category','from-rose-500 to-red-600','2025-12-03 13:07:19','2025-12-28 10:13:23'),(7,'KTP','KTP issuer','2025','/uploads/certificates/Admit_Card-1764946401049-51831143.pdf','/uploads/certificates/logos/ktp-1764946401051-900302962.jpg','SPICE','from-orange-200 to-pink-300','2025-12-05 14:53:21','2025-12-05 14:53:21'),(8,'VAT','VAT issuer','2025','/uploads/certificates/vat-1766917663871-275484532.pdf','/uploads/certificates/logos/vat-1764946499012-29669045.jpg','SPICE','from-orange-500 to-red-600','2025-12-05 14:54:59','2025-12-28 10:27:43'),(9,'NIB','NIB issuer','2025','/uploads/certificates/NIB_-16_SEPTEMBER_2025-_-_PT_INDO_BUSINESS_EXPORTS-1766916823197-520258423.pdf','/uploads/certificates/logos/nib-1764947002479-339591416.jpg','SPICE','from-emerald-500 to-teal-600','2025-12-05 15:03:22','2025-12-28 10:13:43');
 /*!40000 ALTER TABLE `certificates` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-13  5:02:32
+-- Dump completed on 2026-01-21  1:24:59

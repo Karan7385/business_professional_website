@@ -12,12 +12,7 @@ const __dirname = path.dirname(__filename);
 
 async function get_carousel_controller(req, res) {
   try {
-    const [slides] = await get_carousel_home_model();
-
-    console.log("============= CAROUSEL ===============");
-    console.log(slides);
-    console.log("============= CAROUSEL ===============");
-    
+    const [slides] = await get_carousel_home_model();   
 
     return res.status(200).json({
       data: slides,
@@ -29,6 +24,7 @@ async function get_carousel_controller(req, res) {
     });
   }
 }
+
 
 async function edit_carousel_controller(req, res) {
   try {
@@ -99,17 +95,17 @@ async function edit_carousel_controller(req, res) {
         src: item.src ?? null,
       }));
 
-    console.log("NORMALIZED CAROUSEL ITEMS:", normalizedItems);
-
     // Call model with items
     await edit_carousel_home_model(normalizedItems);
 
     return res.status(200).json({
+      success: true,
       message: "Carousel updated successfully",
     });
   } catch (error) {
     console.error("Error updating carousel:", error);
     return res.status(500).json({
+      success: false,
       message: "Failed to update carousel",
     });
   }

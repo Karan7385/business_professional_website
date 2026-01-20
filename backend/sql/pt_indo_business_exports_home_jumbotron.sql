@@ -41,7 +41,7 @@ CREATE TABLE `home_jumbotron` (
 
 LOCK TABLES `home_jumbotron` WRITE;
 /*!40000 ALTER TABLE `home_jumbotron` DISABLE KEYS */;
-INSERT INTO `home_jumbotron` VALUES (1,'uploads/home/jumbotron/exportImages.jpg','Assorted spices and agro commodities','PT INDO BUSINESS EXPORTS','We are a trusted spices exporter and importer, specializing in premium spices, herbs, gums, cloves, and a variety of agro commodities sourced from reliable growers. With a focus on consistent quality, reliable logistics, and long-term partnerships, we deliver top-quality products to global markets, meeting the needs of industries like food, cosmetics, and more.','From farm-level sourcing to export-ready processing, PT INDO BUSINESS EXPORTS provides authentic spices, herbs, and agro commodities with unmatched taste, aroma, and purity. We specialize in delivering top-quality products to spice traders, food manufacturers, and distributors worldwide, ensuring reliable supply and consistent quality for all your bulk spice and herb needs.','2025-12-01 22:06:41','2025-12-06 17:56:20');
+INSERT INTO `home_jumbotron` VALUES (1,'uploads/home/jumbotron/exportImages.jpg','Assorted spices and agro commodities','PT INDO BUSINESS EXPORTS','We are a trusted spices exporter and importer, specializing in premium spices, herbs, gums, and natural oils of agro commodities sourced from reliable growers. With a focus on consistent quality, reliable logistics, and long-term partnerships, we deliver top-quality products to global markets, meeting the needs of industries like food, cosmetics, and medical uses etc.','From farm-level sourcing to export-ready processing, PT INDO BUSINESS EXPORTS provides authentic spices, herbs, gums, natural oils and agro commodities with unmatched taste, aroma, and purity. We specialize in delivering top-quality products to spice traders, food manufacturers, and distributors worldwide, ensuring reliable supply and consistent quality for all your bulk needs.','2025-12-01 22:06:41','2025-12-26 07:09:51');
 /*!40000 ALTER TABLE `home_jumbotron` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-13  5:02:32
+-- Dump completed on 2026-01-21  1:24:59

@@ -4,14 +4,18 @@ import React, {
   useMemo,
   useState,
   memo,
+  useContext,
 } from "react";
-import axios from "axios";
+// import axios from "axios";
+import ContactModalContext from "../context/ContactModalContext";
 
 // 🔸 Replace these with your real API endpoints
-const CATEGORY_API_URL = "http://localhost:3000/api/products/get-categories";
-const PRODUCT_API_URL = "http://localhost:3000/api/products/get-products";
+const BASE_SERVER_URL = import.meta.env.VITE_API_BASE_SERVER_URL;
+// const CATEGORY_API_URL = `${BASE_SERVER_URL}/api/products/get-categories`;
+// const PRODUCT_API_URL = `${BASE_SERVER_URL}/api/products/get-products`;
 
 function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
+  const { products } = useContext(ContactModalContext);
   const [formValues, setFormValues] = useState({
     name: "",
     company: "",
@@ -75,60 +79,83 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
   }, []);
 
   // ✅ Fetch categories from server
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await axios.get(CATEGORY_API_URL);
-        const data = res.data.data;
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const res = await axios.get(CATEGORY_API_URL);
+  //       const data = res.data.data;
 
-        // Expecting: [{ id, category }, ...]
-        const parsed = (Array.isArray(data) ? data : []).map(
-          (item, index) => ({
-            id: item.id ?? item._id ?? String(index),
-            label: item.category ?? item.label ?? `Category ${index + 1}`,
-          })
-        );
+  //       // Expecting: [{ id, category }, ...]
+  //       const parsed = (Array.isArray(data) ? data : []).map(
+  //         (item, index) => ({
+  //           id: item.id ?? item._id ?? String(index),
+  //           label: item.category ?? item.label ?? `Category ${index + 1}`,
+  //         })
+  //       );
 
-        // Sort alphabetically
-        parsed.sort((a, b) => a.label.localeCompare(b.label));
+  //       // Sort alphabetically
+  //       parsed.sort((a, b) => a.label.localeCompare(b.label));
 
-        setCategoryOptions(parsed);
-      } catch (err) {
-        console.error("Failed to fetch categories", err);
-        setCategoryOptions([]);
-      }
-    };
+  //       setCategoryOptions(parsed);
+  //     } catch (err) {
+  //       console.error("Failed to fetch categories", err);
+  //       setCategoryOptions([]);
+  //     }
+  //   };
 
-    fetchCategories();
-  }, []);
+  //   fetchCategories();
+  // }, []);
 
   // ✅ Fetch products from server
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get(PRODUCT_API_URL);
-        const data = res.data.data;
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const res = await axios.get(PRODUCT_API_URL);
+  //       const data = res.data.data;
 
-        // Expecting: [{ id, name }, ...]
-        const parsed = (Array.isArray(data) ? data : []).map(
-          (item, index) => ({
-            id: item.id ?? item._id ?? String(index),
-            label: item.name ?? item.label ?? `Product ${index + 1}`,
-          })
-        );
+  //       // Expecting: [{ id, name }, ...]
+  //       const parsed = (Array.isArray(data) ? data : []).map(
+  //         (item, index) => ({
+  //           id: item.id ?? item._id ?? String(index),
+  //           label: item.name ?? item.label ?? `Product ${index + 1}`,
+  //         })
+  //       );
 
-        // Sort alphabetically
-        parsed.sort((a, b) => a.label.localeCompare(b.label));
+  //       // Sort alphabetically
+  //       parsed.sort((a, b) => a.label.localeCompare(b.label));
 
-        setProductOptions(parsed);
-      } catch (err) {
-        console.error("Failed to fetch products", err);
-        setProductOptions([]);
+  //       setProductOptions(parsed);
+  //     } catch (err) {
+  //       console.error("Failed to fetch products", err);
+  //       setProductOptions([]);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, []);
+
+  const categories = useMemo(() => {
+    const map = new Map();
+
+    products.forEach((p) => {
+      if (!map.has(p.category)) {
+        map.set(p.category, {
+          id: p.id,
+          category: p.category,
+        });
       }
-    };
+    });
 
-    fetchProducts();
-  }, []);
+    return Array.from(map.values());
+  }, [products]);
+
+  const productNames = useMemo(() => {
+    return products.map((p) => ({
+      id: p.id,
+      name: p.name,
+    }));
+  }, [products]);
+
 
   // Reset when closed
   useEffect(() => {
@@ -219,20 +246,20 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
 
   // ✅ Filtered category / product options (for dropdown search)
   const filteredCategoryOptions = useMemo(() => {
-    if (!categorySearch.trim()) return categoryOptions;
+    if (!categorySearch.trim()) return categories;
     const q = categorySearch.toLowerCase();
-    return categoryOptions.filter((c) =>
-      c.label.toLowerCase().includes(q)
+    return categories.filter((c) =>
+      c.category.toLowerCase().includes(q)
     );
-  }, [categoryOptions, categorySearch]);
+  }, [categories, categorySearch]);
 
   const filteredProductOptions = useMemo(() => {
-    if (!productSearch.trim()) return productOptions;
+    if (!productSearch.trim()) return productNames;
     const q = productSearch.toLowerCase();
-    return productOptions.filter((p) =>
+    return productNames.filter((p) =>
       p.label.toLowerCase().includes(q)
     );
-  }, [productOptions, productSearch]);
+  }, [productNames, productSearch]);
 
   const errors = useMemo(() => {
     const newErrors = {};
@@ -301,15 +328,18 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
 
       try {
         setIsSubmitting(true);
-
+        
+        
         // 👉 Convert selected IDs to NAMES here
-        const selectedCategoryNames = categoryOptions
-          .filter((cat) => formValues.categories.includes(cat.id))
-          .map((cat) => cat.label);
-
-        const selectedProductNames = productOptions
+        console.log(categoryOptions);
+        
+        const selectedCategoryNames = categories
+        .filter((cat) => formValues.categories.includes(cat.id))
+        .map((cat) => cat.category);
+        
+        const selectedProductNames = productNames
           .filter((prod) => formValues.products.includes(prod.id))
-          .map((prod) => prod.label);
+          .map((prod) => prod.name);
 
         const payload = {
           name: formValues.name.trim(),
@@ -324,7 +354,8 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
         };
 
         if (onSubmit) {
-          await onSubmit(payload);
+          const temp = await onSubmit(payload);
+          console.log("Contact form submitted, response:", temp);
         } else {
           console.log("Contact form payload:", payload);
         }
@@ -669,7 +700,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                   </div>
 
                   {(touched.phone && errors.phone) ||
-                  (touched.countryCode && errors.countryCode) ? (
+                    (touched.countryCode && errors.countryCode) ? (
                     <p className="mt-1 text-[11px] text-[#B2501F]">
                       {errors.countryCode || errors.phone}
                     </p>
@@ -759,10 +790,9 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                                   <span
                                     className={`
                                       inline-flex h-3 w-3 items-center justify-center rounded-[4px] border
-                                      ${
-                                        isSelected
-                                          ? "border-[#7A1F1F] bg-[#7A1F1F]"
-                                          : "border-[#D9C7A8] bg-white"
+                                      ${isSelected
+                                        ? "border-[#7A1F1F] bg-[#7A1F1F]"
+                                        : "border-[#D9C7A8] bg-white"
                                       }
                                     `}
                                   >
@@ -771,7 +801,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                                     )}
                                   </span>
                                   <span className="truncate text-[#3A211F]">
-                                    {cat.label}
+                                    {cat.category}
                                   </span>
                                 </span>
                                 {isSelected && (
@@ -928,10 +958,9 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                                   <span
                                     className={`
                                       inline-flex h-3 w-3 items-center justify-center rounded-[4px] border
-                                      ${
-                                        isSelected
-                                          ? "border-[#7A1F1F] bg-[#7A1F1F]"
-                                          : "border-[#D9C7A8] bg-white"
+                                      ${isSelected
+                                        ? "border-[#7A1F1F] bg-[#7A1F1F]"
+                                        : "border-[#D9C7A8] bg-white"
                                       }
                                     `}
                                   >
@@ -940,7 +969,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                                     )}
                                   </span>
                                   <span className="truncate text-[#3A211F]">
-                                    {prod.label}
+                                    {prod.name}
                                   </span>
                                 </span>
                                 {isSelected && (
@@ -1083,10 +1112,9 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                       rounded-full text-xs sm:text-sm font-semibold
                       shadow-md hover:shadow-lg
                       transition-all duration-200
-                      ${
-                        isSubmitting || !isFormValid
-                          ? "bg-[#F5E1B8] text-[#7A1F1F]/60 cursor-not-allowed"
-                          : "bg-[#EAC97C] text-[#7A1F1F] hover:bg-[#F4D489] hover:-translate-y-0.5"
+                      ${isSubmitting || !isFormValid
+                        ? "bg-[#F5E1B8] text-[#7A1F1F]/60 cursor-not-allowed"
+                        : "bg-[#EAC97C] text-[#7A1F1F] hover:bg-[#F4D489] hover:-translate-y-0.5"
                       }
                     `}
                   >

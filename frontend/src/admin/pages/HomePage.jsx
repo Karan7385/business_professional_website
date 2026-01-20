@@ -7,7 +7,7 @@ import { Toaster, toast } from "react-hot-toast";
 
 // ==================================== CONSTANTS =================================================
 
-const BASE_SERVER_URL = "http://localhost:3000";
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 // ==================================== CONSTANTS =================================================
 
