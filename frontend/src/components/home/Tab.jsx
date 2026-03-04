@@ -51,7 +51,7 @@ function TabBase(props) {
           Why Choose PT Indo Business Exports
         </h2>
         <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-          Explore our key statistics, services, and frequently asked questions to understand us better.
+          Explore our key statistics, services, and frequently asked questions to understand us better
         </p>
       </header>
 

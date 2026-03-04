@@ -215,15 +215,15 @@ export default function NavbarA({ openModal, setOpenModal }) {
                 <img
                   src={Logo}
                   className="h-24 w-auto"
-                  alt="PT INDO BUSINESS EXPORTS logo"
+                  alt="PT Indo Business Exports logo"
                   loading="lazy"
                 />
                 <div className="flex flex-col">
-                  <h1 className="text-xl font-bold text-[#7A1F1F] leading-tight unbounded-heading">
-                    PT INDO BUSINESS EXPORTS
+                  <h1 className="sm:text-xl lg:text-3xl font-bold text-[#7A1F1F] leading-tight unbounded-heading">
+                    PT Indo Business Exports
                   </h1>
                   <p className="text-xs text-[#7A1F1F] font-medium unbounded-subHeading">
-                    SPICES, HERBS, GUMS RESINS AND NATURAL ESSENTIAL OILS
+                    SPICES, HERBS, GUM RESINS AND NATURAL ESSENTIAL OILS
                   </p>
                 </div>
               </Link>
@@ -282,7 +282,7 @@ export default function NavbarA({ openModal, setOpenModal }) {
                           type="button"
                           onClick={() => setProductOpen((prev) => !prev)}
                           className={`
-                            flex items-center space-x-1 text-sm font-semibold px-3 py-2 rounded-lg
+                            flex items-center space-x-1 text-md font-semibold px-3 py-2 rounded-lg
                             transition-all duration-200 border border-transparent
                             ${location.pathname.startsWith(item.path)
                               ? "text-[#7A1F1F] bg-[#EAC97C]/10 border-[#EAC97C]/30"
@@ -423,7 +423,7 @@ export default function NavbarA({ openModal, setOpenModal }) {
                       key={item.label}
                       to={item.path}
                       className={({ isActive }) =>
-                        `text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200 ${isActive
+                        `text-md font-semibold px-3 py-2 rounded-lg transition-all duration-200 ${isActive
                           ? "text-[#7A1F1F] bg-[#EAC97C]/10 border border-[#EAC97C]/30"
                           : "text-gray-700 hover:text-[#7A1F1F] hover:border hover:bg-[#EAC97C]/10"
                         }`

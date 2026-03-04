@@ -148,7 +148,7 @@ export default function ProductShowcase({ product, index }) {
               onClick={openContactModal}
               className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#EAC97C] text-[#7A1F1F] font-semibold text-xs transition-all duration-300 hover:bg-[#d8b569] shadow-md hover:shadow-lg border border-[#EAC97C] sanchez-regular"
             >
-              Enquiry Now
+              Enquire Now
             </button>
           </div>
 

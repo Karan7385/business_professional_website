@@ -95,11 +95,6 @@ function WhyUsBase({ mounted, sectionBase, sectionActive }) {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#7A1F1F] sanchez-regular">
               {section.title}
             </h2>
-            {section.subtitle && (
-              <p className="text-sm sm:text-base text-[#4A372B] max-w-3xl mx-auto mt-1 robot-text">
-                {section.subtitle}
-              </p>
-            )}
           </div>
 
           {/* Content */}

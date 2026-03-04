@@ -6,6 +6,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+Thaana:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Pacifico&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sanchez:ital@0;1&family=Shadows+Into+Light&family=Titan+One&family=Unbounded:wght@200..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,900;1,900&display=swap');
+
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
 
@@ -60,31 +62,28 @@
 
 
 /* ============================ FONT STYLES ================================= */
+
 .unbounded-heading {
-  font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
+  font-family: "Syne", sans-serif;
   font-weight: 800;
-  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
 
 .unbounded-subHeading {
-  font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .roboto-text {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
+  font-family: "Instrument Sans", sans-serif;
   font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  line-height: 1.6;
 }
 
 .sanchez-regular {
-  font-family: "Sanchez", serif;
+  font-family: "Fraunces", serif;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
   font-weight: 400;
-  font-style: normal;
 }

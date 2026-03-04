@@ -266,7 +266,7 @@ const UserDropdown = ({ user }) => {
 export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard"); // default
-  const notificationCount = 3;
+  // const notificationCount = 3;
 
   // User Dropdown Data
   const user = {
@@ -330,12 +330,12 @@ export default function AdminLayout() {
 
       {/* Navbar */}
       <header className="sticky top-0 z-30 border-b border-slate-200/70 bg-linear-to-r from-white via-slate-50 to-slate-100 backdrop-blur-lg shadow-xl">
-        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-full mx-auto px-4 sm:px-4 lg:px-8 h-16 flex items-center justify-between">
           {/* Left */}
           <div className="flex items-center gap-3">
             {/* mobile menu button */}
             <button
-              className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100/80 transition-colors duration-150"
+              className="md:hidden p-1 rounded-lg text-slate-700 hover:bg-slate-100/80 transition-colors duration-150"
               onClick={() => setSidebarOpen(true)}
               aria-label="Open sidebar"
             >
@@ -369,13 +369,13 @@ export default function AdminLayout() {
               </div>
 
               <div className="flex flex-col">
-                <span className="text-sm font-extrabold tracking-tight leading-snug">
+                <span className="text-lg font-extrabold tracking-tight leading-snug">
                   <span className="bg-clip-text text-lg text-transparent bg-linear-to-r from-slate-700 via-slate-900 to-slate-950 unbounded-heading">
-                    PT INDO BUSINESS EXPORT
+                    PT Indo Business EXPORT
                   </span>
                 </span>
                 <span className="text-[11px] text-slate-500 tracking-wide unbounded-subHeading">
-                  SPICES, HERBS, GUMS RESINS AND NATURAL ESSENTIAL OILS · Admin Panel
+                  SPICES, HERBS, GUM RESINS AND NATURAL ESSENTIAL OILS · Admin Panel
                 </span>
               </div>
             </div>

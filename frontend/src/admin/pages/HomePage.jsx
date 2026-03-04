@@ -213,6 +213,14 @@ const CancelButton = ({ ...props }) => (
 
 
 const HomePage = () => {
+  const [jumbotron, setJumbotron] = useState({
+    backgroundImageFile: null,
+    backgroundImagePreview: "",
+    backgroundAlt: "",
+    title: "",
+    intro: "",
+    body: "",
+  });
 
   // ----------------------------------------- JUMBOTRON ----------------------------------------------------
 
@@ -260,15 +268,6 @@ const HomePage = () => {
     fetchJumbotron();
   }, []);
 
-
-  const [jumbotron, setJumbotron] = useState({
-    backgroundImageFile: null,
-    backgroundImagePreview: "",
-    backgroundAlt: "",
-    title: "",
-    intro: "",
-    body: "",
-  });
   const [isEditingJumbotron, setIsEditingJumbotron] = useState(false);
 
 
@@ -529,7 +528,7 @@ const HomePage = () => {
                     <Label>Title</Label>
                     <TextInput
                       disabled={!isEditingJumbotron}
-                      placeholder="PT INDO BUSINESS EXPORTS"
+                      placeholder="PT Indo Business Exports"
                       value={jumbotron.title}
                       onChange={(e) =>
                         setJumbotron((prev) => ({
@@ -1055,7 +1054,7 @@ const HomePage = () => {
                           disabled={!isEditingTabs}
                           rows={3}
                           value={f.answer}
-                          placeholder="PT INDO BUSINESS EXPORTS specializes in..."
+                          placeholder="PT Indo Business Exports specializes in..."
                           onChange={(e) =>
                             setFaqs((prev) =>
                               prev.map((faq) =>

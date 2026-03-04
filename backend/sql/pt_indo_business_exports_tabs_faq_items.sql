@@ -38,7 +38,7 @@ CREATE TABLE `tabs_faq_items` (
 
 LOCK TABLES `tabs_faq_items` WRITE;
 /*!40000 ALTER TABLE `tabs_faq_items` DISABLE KEYS */;
-INSERT INTO `tabs_faq_items` VALUES (1,'What does PT INDO BUSINESS EXPORTS specialize in?','PT INDO BUSINESS EXPORTS specializes in exporting premium-quality spices, herbs, gums, natural oils and agricultural commodities sourced directly from trusted farmers and certified producers.','2025-12-02 13:18:32','2025-12-26 07:40:02'),(2,'Do you supply globally?','Yes, PT INDO BUSINESS EXPORTS ships globally with an efficient logistics network ensuring timely delivery, export documentation support and consistent product availability throughout the year.','2025-12-02 13:18:32','2025-12-02 13:18:32'),(3,'How do you maintain product quality?','Our products undergo multi-stage cleaning, grading and quality testing including microbiological checks, moisture control and packaging integrity inspections to meet international export standards.','2025-12-02 13:18:32','2025-12-02 13:18:32');
+INSERT INTO `tabs_faq_items` VALUES (1,'What does PT Indo Business Exports specialize in?','PT Indo Business Exports specializes in exporting premium-quality spices, herbs, gums, natural oils and agricultural commodities sourced directly from trusted farmers and certified producers.','2025-12-02 13:18:32','2025-12-26 07:40:02'),(2,'Do you supply globally?','Yes, PT Indo Business Exports ships globally with an efficient logistics network ensuring timely delivery, export documentation support and consistent product availability throughout the year.','2025-12-02 13:18:32','2025-12-02 13:18:32'),(3,'How do you maintain product quality?','Our products undergo multi-stage cleaning, grading and quality testing including microbiological checks, moisture control and packaging integrity inspections to meet international export standards.','2025-12-02 13:18:32','2025-12-02 13:18:32');
 /*!40000 ALTER TABLE `tabs_faq_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-21  1:24:58
+-- Dump completed on 2026-01-21  1:35:06

@@ -435,7 +435,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                 <div className="rounded-2xl bg-white/80 border border-[#F4DEC3] shadow-md p-1.5">
                   <img
                     src={logoSrc}
-                    alt="PT INDO Business Exports Logo"
+                    alt="PT Indo Business Exports Logo"
                     loading="lazy"
                     decoding="async"
                     className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
@@ -451,7 +451,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                   className="text-lg sm:text-xl font-extrabold tracking-tight unbounded-heading"
                   style={{ color: MAROON }}
                 >
-                  PT INDO BUSINESS EXPORTS
+                  PT Indo Business Exports
                 </h2>
               </div>
             </div>

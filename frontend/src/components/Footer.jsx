@@ -22,13 +22,13 @@ function Footer() {
               <Link to="/" className="inline-flex items-center gap-4">
                 <img
                   src={LogoSrc}
-                  alt="PT INDO BUSINESS EXPORTS"
+                  alt="PT Indo Business Exports"
                   className="h-20 sm:h-24 md:h-28 w-auto object-contain"
                 />
               </Link>
 
               <p className="mt-3 text-sm text-[#4b2a2a] max-w-sm sanchez-regular text-justify">
-                PT INDO BUSINESS EXPORT — exporters of premium spices, herbs and
+                PT Indo Business EXPORT — exporters of premium spices, herbs and
                 dry fruits. Trusted sourcing, ethical practices and global
                 deliveries.
               </p>
@@ -166,7 +166,7 @@ function Footer() {
                     </span>
 
                     <div className="text-left text-xs text-[#5b2f2f] break-all">
-                      info@ptindobusiness.com
+                      indobusinessexports@gmail.com
                     </div>
                   </a>
                 </li>
@@ -224,7 +224,7 @@ function Footer() {
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-sm text-[#5b2f2f] text-center md:text-left">
-              © {new Date().getFullYear()} PT INDO BUSINESS EXPORTS. All rights
+              © {new Date().getFullYear()} PT Indo Business Exports. All rights
               reserved.
             </div>
 

@@ -181,9 +181,9 @@ function ProductVerticalSliderBase({ data }) {
               {/* Info */}
               <div className="w-3/5 flex flex-col justify-between">
                 <div>
-                  <span className="text-xs font-bold uppercase text-[#7A1F1F]">
+                  {/* <span className="text-xs font-bold uppercase text-[#7A1F1F]">
                     {product.type}
-                  </span>
+                  </span> */}
                   <h3 className="text-xl font-semibold mt-2">
                     {product.name}
                   </h3>

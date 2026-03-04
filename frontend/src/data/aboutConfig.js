@@ -1,6 +1,7 @@
 import Amit from '../assets/images/team/Amit-Agrawal.jpeg';
-import Ram from '../assets/images/team/Ram-Prasad-Agrawal.jpeg';
-import Kshitiz from '../assets/images/team/Kshitiz-Agrawal.jpeg';
+import Sanjay from '../assets/images/team/Sanjay.jpg';
+import Siddarth from '../assets/images/team/Siddarth.jpg';
+import nirav from '../assets/images/team/Sanjay.jpg';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -13,23 +14,29 @@ export const TEAM_MEMBERS = [
     image: BASE_URL + Amit,
   },
   {
-    name: "Mr. Ram Prasad Agrawal",
+    name: "Mr. Sanjay Maheshwari",
     title: "Chairman",
-    bio: "Mr. Ram Prasad Agrawal is a commerce graduate and have more then 35 years of experience in business industries. He is the person behind this venture and is instrumental in conceptualizing the business model and giving it a shape to grow and excel with its qualified team of professionals.",
-    image: BASE_URL + Ram,
+    bio: "Mr. Maheshwari leveraged his strategic expertise in shipping & procurement backed with his financial knowledege to establish import-export ventures for the company.",
+    image: BASE_URL + Sanjay,
   },
   {
-    name: "Mr. Kshitiz Agrawal",
+    name: "Mr. Siddarth Bhutra",
     title: "Founder",
-    bio: "Mr. Kshitiz Ram Prasad Agrawal holds master’s degree from top business school in London. He has an experience of past 15 years in different trade and service industry. His innovation and enthusiasm have fuelled the growth engine of the company.",
-    image: BASE_URL + Kshitiz,
+    bio: "Striving for continuous growth, Mr. Bhutra leads the expansion of the business to newer regions, while heading the Finance & Accounting for the firm.",
+    image: BASE_URL + Siddarth,
+  },
+  {
+    name: "Mr. Nirav Shroff",
+    title: "Founder",
+    bio: "With his deep experience of imports and long found network of industry leaders, Mr. Shroff was able to create a value chain of growth that built the foundation of interocean's success.",
+    image: BASE_URL + nirav,
   }
 ];
 
 export const TIMELINE_EVENTS = [
   {
     date: "2014",
-    title: "Founded PT INDO BUSINESS EXPORTS",
+    title: "Founded PT Indo Business Exports",
     description:
       "Started as a focused trading house connecting trusted farmers and local suppliers of Indian and Indonesian spices to regional buyers.",
   },
@@ -72,18 +79,18 @@ export const HERO_MISSION_VISION = [
   {
     key: "mission",
     label: "🎯 Our Mission",
-    tag: "Quality First",
+    // tag: "Quality First"
     text:
       "To deliver Indonesia’s natural excellence to the world by combining deep consumer understanding, scientific innovation, and a world-class supply chain that ensures purity, consistency, and complete customer satisfaction.",
-    highlight: "Consistent Quality",
+    // highlight: "Consistent Quality",
   },
   {
     key: "vision",
     label: "✨ Our Vision",
-    tag: "Global Reach",
+    // tag: "Global Reach",
     text:
-      "To be the global leader in supplying premium Indonesian commodities recognized for unmatched quality, authenticity, and reliability.",
-    highlight: "Partner of Choice",
+      "To be the global leader in supplying premium Indonesian spices recognized for unmatched quality, authenticity, and reliability.",
+    // highlight: "Partner of Choice",
   },
 ];
 
@@ -118,7 +125,6 @@ export const WHY_US_SECTION = {
   id: "why-us",
   eyebrow: "Why Choose PT Indo Business Exports",
   title: "Reliable Partner for Indonesia’s Natural Excellence",
-  subtitle: "Premium quality, authentic taste, and a supply chain you can rely on.",
 };
 
 export const WHY_US_FEATURES = [

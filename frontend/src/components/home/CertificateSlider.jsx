@@ -13,8 +13,8 @@ function CertificateContinuousBannerBase(props) {
   })
   // Optional: heading config (also dynamic)
   const heading = {
-    title: "Trusted Global Certifications",
-    subtitle: "Verified global credentials ensuring trust and quality in every export.",
+    title: "Recognized Certifications",
+    subtitle: "Verified certifications ensuring trust and quality in every export.",
   };
 
   const { title, subtitle } = heading;

@@ -24,7 +24,7 @@ const CertificatesHero = memo(function CertificatesHero({
       <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-linear-to-br from-[#7A1F1F]/5 via-[#EAC97C]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-[#7A1F1F]/10 to-[#EAC97C]/10 border border-[#7A1F1F]/20 mb-6">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-[#7A1F1F]/10 to-[#EAC97C]/10 border border-[#7A1F1F]/20 mb-6">
           <svg
             className="w-4 h-4 text-[#7A1F1F]"
             fill="currentColor"
@@ -39,7 +39,7 @@ const CertificatesHero = memo(function CertificatesHero({
           <span className="text-sm font-semibold text-[#7A1F1F] unbounded-subHeading">
             {eyebrow}
           </span>
-        </div>
+        </div> */}
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-[#7A1F1F] via-[#9a2f2f] to-[#7A1F1F] tracking-tight mb-6 sanchez-regular">
           {title}

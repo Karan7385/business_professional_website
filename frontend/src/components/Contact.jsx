@@ -232,13 +232,13 @@ export default function Contact() {
                         {[
                             {
                                 name: "Indonesia",
-                                email: "info@ptindobusiness.com",
+                                email: "indobusinessexports@gmail.com",
                                 phone: ["+62 82338 515405", "+62 85926 424213"],
                                 color: "from-blue-700 to-blue-600",
                             },
                             {
                                 name: "India",
-                                email: "info@ptindobusiness.com",
+                                email: "indobusinessexports@gmail.com",
                                 phone: ["+91 73859 84164", "+91 85528 81888"],
                                 color: "from-green-700 to-green-600",
                             },

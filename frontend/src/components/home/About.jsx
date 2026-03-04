@@ -20,15 +20,15 @@ export default function About() {
                 </div>
 
                 {/* Simple overlay label */}
-                <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-medium text-gray-700 shadow-lg">
+                {/* <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-medium text-gray-700 shadow-lg">
                   <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
                   Global Sourcing
-                </div>
+                </div> */}
               </div>
 
               {/* Minimalist floating badge */}
               <div className="absolute -right-4 bottom-8 hidden sm:block rounded-xl border border-red-200 bg-white/90 p-3 text-sm font-semibold text-red-600 shadow-lg backdrop-blur-sm">
-                PT INDO BUSINESS EXPORTS
+                PT Indo Business Exports
               </div>
             </div>
           </div>
@@ -43,13 +43,13 @@ export default function About() {
             {/* Minimalist, clean header (using red accent) */}
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-gray-900">
               Dedicated to{" "}
-              <span className="font-semibold text-red-600">quality</span>,
-              transparency, and global supply.
+              <span className="font-semibold text-red-600">global quality</span>,
+              transparency, and global supply
             </h2>
 
             {/* Minimalist body text */}
             <p className="text-base text-gray-600 leading-relaxed max-w-xl">
-              PT INDO Business Exports specializes in premium spices, herbs, gums resins, and natural essential oils, sourced directly from trusted farmers and certified processors. We offer consistent purity, aroma, and quality with safe packaging and on-time global delivery for importers, manufacturers, and wholesale buyers.
+              PT Indo Business Exports specializes in premium spices, herbs, gum resins, and natural essential oils, sourced directly from trusted farmers and certified processors. We offer consistent purity, aroma, and quality with safe packaging and on-time global delivery for importers, manufacturers, and wholesale buyers.
             </p>
 
             {/* Minimalist stats section (using white/red tones) */}

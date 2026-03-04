@@ -52,18 +52,6 @@ function HeroMissionVision({ mounted, sectionBase, sectionActive }) {
               <p className="mt-3 text-sm sm:text-base text-[#2B1F1C] leading-relaxed text-justify">
                 {item.text}
               </p>
-              <div
-                className="mt-4 sm:mt-5 mx-3 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-[#8A2E1F]/20
-                  text-[#8A2E1F] font-semibold text-xs sm:text-sm group-hover:bg-[#8A2E1F]/30 transition-colors sanchez-regular"
-              >
-                {item.tag}
-              </div>
-              <div
-                className="mt-4 sm:mt-5 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-[#8A2E1F]/20
-                  text-[#8A2E1F] font-semibold text-xs sm:text-sm group-hover:bg-[#8A2E1F]/30 transition-colors sanchez-regular"
-              >
-                {item.highlight}
-              </div>
             </div>
           ))}
         </div>
