@@ -28,7 +28,7 @@ export default function About() {
 
               {/* Minimalist floating badge */}
               <div className="absolute -right-4 bottom-8 hidden sm:block rounded-xl border border-red-200 bg-white/90 p-3 text-sm font-semibold text-red-600 shadow-lg backdrop-blur-sm">
-                PT Indo Business Exports
+                PT ATLAS GLOBAL VENTURES
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function About() {
 
             {/* Minimalist body text */}
             <p className="text-base text-gray-600 leading-relaxed max-w-xl">
-              PT Indo Business Exports specializes in premium spices, herbs, gum resins, and natural essential oils, sourced directly from trusted farmers and certified processors. We offer consistent purity, aroma, and quality with safe packaging and on-time global delivery for importers, manufacturers, and wholesale buyers.
+              PT ATLAS GLOBAL VENTURES specializes in premium spices, herbs, gum resins, and natural essential oils, sourced directly from trusted farmers and certified processors. We offer consistent purity, aroma, and quality with safe packaging and on-time global delivery for importers, manufacturers, and wholesale buyers.
             </p>
 
             {/* Minimalist stats section (using white/red tones) */}

@@ -11,7 +11,7 @@ function CarouselBase(props) {
   const SLIDES = rawSlides.map((item, index) => ({
     id: item.id ?? index,
     src: item.src ? BASE_SERVER_URL + item.src : DummyImage,
-    alt: item.alt || "PT INDO banner image",
+    alt: item.alt || "PT ATLAS banner image",
     label: item.label || "Premium global spices and herbs",
   }));
 
@@ -129,7 +129,7 @@ function CarouselBase(props) {
                       >
                         {/* Small pill */}
                         <span className="inline-flex items-center px-3 py-1 mb-3 text-[11px] sm:text-xs uppercase tracking-[0.2em] rounded-full bg-amber-400/90 text-zinc-900 shadow-md unbounded-heading">
-                          Global Export • PT INDO
+                          Global Export • PT ATLAS
                         </span>
 
                         {/* Main label */}

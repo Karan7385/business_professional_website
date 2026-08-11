@@ -6,11 +6,11 @@ import React, {
   memo,
   useContext,
 } from "react";
-// import axios from "axios";
+import axios from "axios";
 import ContactModalContext from "../context/ContactModalContext";
 
 // 🔸 Replace these with your real API endpoints
-const BASE_SERVER_URL = import.meta.env.VITE_API_BASE_SERVER_URL;
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 // const CATEGORY_API_URL = `${BASE_SERVER_URL}/api/products/get-categories`;
 // const PRODUCT_API_URL = `${BASE_SERVER_URL}/api/products/get-products`;
 
@@ -24,7 +24,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
     message: "",
     countryCode: "",
     categories: [], // stores IDs
-    products: [],   // stores IDs
+    products: [], // stores IDs
   });
 
   const [touched, setTouched] = useState({});
@@ -50,26 +50,21 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
   useEffect(() => {
     const fetchCountryCodes = async () => {
       try {
-        const res = await fetch(
-          "https://restcountries.com/v3.1/all?fields=idd,name"
-        );
-        const data = await res.json();
+        // 1. Axios request to your optimized backend route
+        const response = await axios.get(`${BASE_SERVER_URL}/api/country-code`);
+        const data = response.data;
 
-        const parsed = data
-          .map((c) => {
-            const root = c.idd?.root;
-            const suffix = c.idd?.suffixes?.[0] || "";
-            if (!root) return null;
+        // 2. Simply check if the response payload is an array
+        if (Array.isArray(data)) {
+          // Map the backend properties directly to your local state format
+          const parsed = data.map((c) => ({
+            name: c.name,
+            dialCode: c.callingCode, // Maps directly to your existing state property
+            code: c.code, // Included just in case your dropdown needs the ISO code (e.g., "US", "IN")
+          }));
 
-            return {
-              name: c.name?.common || "",
-              dialCode: `${root}${suffix}`,
-            };
-          })
-          .filter(Boolean)
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        setCountryCodes(parsed);
+          setCountryCodes(parsed);
+        }
       } catch (err) {
         console.error("Failed to fetch country codes", err);
       }
@@ -153,9 +148,40 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
     return products.map((p) => ({
       id: p.id,
       name: p.name,
+      category: p.category,
     }));
   }, [products]);
 
+  useEffect(() => {
+  // If no category selected, clear selected products
+  if (formValues.categories.length === 0) {
+    setFormValues((prev) => ({
+      ...prev,
+      products: [],
+    }));
+    return;
+  }
+
+  // Selected category names
+  const selectedCategoryNames = categories
+    .filter((cat) => formValues.categories.includes(cat.id))
+    .map((cat) => cat.category);
+
+  // Valid product ids
+  const validProductIds = products
+    .filter((product) =>
+      selectedCategoryNames.includes(product.category)
+    )
+    .map((product) => product.id);
+
+  // Remove products that no longer belong to selected categories
+  setFormValues((prev) => ({
+    ...prev,
+    products: prev.products.filter((id) =>
+      validProductIds.includes(id)
+    ),
+  }));
+}, [formValues.categories, categories, products]);
 
   // Reset when closed
   useEffect(() => {
@@ -240,7 +266,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
     return countryCodes.filter(
       (c) =>
         c.name.toLowerCase().includes(q) ||
-        c.dialCode.toLowerCase().includes(q)
+        c.dialCode.toLowerCase().includes(q),
     );
   }, [countryCodes, codeSearch]);
 
@@ -248,18 +274,35 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
   const filteredCategoryOptions = useMemo(() => {
     if (!categorySearch.trim()) return categories;
     const q = categorySearch.toLowerCase();
-    return categories.filter((c) =>
-      c.category.toLowerCase().includes(q)
-    );
+    return categories.filter((c) => c.category.toLowerCase().includes(q));
   }, [categories, categorySearch]);
 
   const filteredProductOptions = useMemo(() => {
-    if (!productSearch.trim()) return productNames;
-    const q = productSearch.toLowerCase();
-    return productNames.filter((p) =>
-      p.label.toLowerCase().includes(q)
-    );
-  }, [productNames, productSearch]);
+    let filtered = [...productNames];
+
+    // Filter products based on selected categories
+    if (formValues.categories.length > 0) {
+      // Get selected category names
+      const selectedCategoryNames = categories
+        .filter((cat) => formValues.categories.includes(cat.id))
+        .map((cat) => cat.category);
+
+      filtered = filtered.filter((product) =>
+        selectedCategoryNames.includes(product.category),
+      );
+    }
+
+    // Search filter
+    if (productSearch.trim()) {
+      const q = productSearch.toLowerCase();
+
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(q),
+      );
+    }
+
+    return filtered;
+  }, [productNames, categories, formValues.categories, productSearch]);
 
   const errors = useMemo(() => {
     const newErrors = {};
@@ -305,10 +348,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
     return newErrors;
   }, [formValues]);
 
-  const isFormValid = useMemo(
-    () => Object.keys(errors).length === 0,
-    [errors]
-  );
+  const isFormValid = useMemo(() => Object.keys(errors).length === 0, [errors]);
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -328,15 +368,14 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
 
       try {
         setIsSubmitting(true);
-        
-        
+
         // 👉 Convert selected IDs to NAMES here
         console.log(categoryOptions);
-        
+
         const selectedCategoryNames = categories
-        .filter((cat) => formValues.categories.includes(cat.id))
-        .map((cat) => cat.category);
-        
+          .filter((cat) => formValues.categories.includes(cat.id))
+          .map((cat) => cat.category);
+
         const selectedProductNames = productNames
           .filter((prod) => formValues.products.includes(prod.id))
           .map((prod) => prod.name);
@@ -364,7 +403,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
       } catch (err) {
         console.error(err);
         setSubmitError(
-          "Something went wrong while sending your message. Please try again."
+          "Something went wrong while sending your message. Please try again.",
         );
       } finally {
         setIsSubmitting(false);
@@ -377,7 +416,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
       onClose,
       categoryOptions, // ✅ included so mapping uses fresh options
       productOptions,
-    ]
+    ],
   );
 
   if (!isOpen) return null;
@@ -435,7 +474,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                 <div className="rounded-2xl bg-white/80 border border-[#F4DEC3] shadow-md p-1.5">
                   <img
                     src={logoSrc}
-                    alt="PT Indo Business Exports Logo"
+                    alt="PT ATLAS GLOBAL VENTURES Logo"
                     loading="lazy"
                     decoding="async"
                     className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
@@ -451,7 +490,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                   className="text-lg sm:text-xl font-extrabold tracking-tight unbounded-heading"
                   style={{ color: MAROON }}
                 >
-                  PT Indo Business Exports
+                  PT ATLAS GLOBAL VENTURES
                 </h2>
               </div>
             </div>
@@ -595,9 +634,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                     <div className="relative w-full sm:w-32">
                       <button
                         type="button"
-                        onClick={() =>
-                          setIsCodeDropdownOpen((prev) => !prev)
-                        }
+                        onClick={() => setIsCodeDropdownOpen((prev) => !prev)}
                         className="
                           flex w-full items-center justify-between
                           rounded-xl border border-[#EED8C0] bg-white/80
@@ -625,9 +662,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                             <input
                               type="text"
                               value={codeSearch}
-                              onChange={(e) =>
-                                setCodeSearch(e.target.value)
-                              }
+                              onChange={(e) => setCodeSearch(e.target.value)}
                               className="
                                 w-full rounded-lg border border-[#EED8C0]
                                 px-2 py-1 text-xs text-[#3A211F]
@@ -643,9 +678,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                               <li key={`${c.name}-${c.dialCode}`}>
                                 <button
                                   type="button"
-                                  onMouseDown={(e) =>
-                                    e.preventDefault()
-                                  }
+                                  onMouseDown={(e) => e.preventDefault()}
                                   onClick={() => {
                                     setFormValues((prev) => ({
                                       ...prev,
@@ -700,7 +733,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                   </div>
 
                   {(touched.phone && errors.phone) ||
-                    (touched.countryCode && errors.countryCode) ? (
+                  (touched.countryCode && errors.countryCode) ? (
                     <p className="mt-1 text-[11px] text-[#B2501F]">
                       {errors.countryCode || errors.phone}
                     </p>
@@ -717,9 +750,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                 <div className="relative">
                   <button
                     type="button"
-                    onClick={() =>
-                      setIsCategoryOpen((prev) => !prev)
-                    }
+                    onClick={() => setIsCategoryOpen((prev) => !prev)}
                     className="
                       flex w-full items-center justify-between
                       rounded-xl border border-[#EED8C0] bg-white/80
@@ -749,9 +780,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                         <input
                           type="text"
                           value={categorySearch}
-                          onChange={(e) =>
-                            setCategorySearch(e.target.value)
-                          }
+                          onChange={(e) => setCategorySearch(e.target.value)}
                           className="
                             w-full rounded-lg border border-[#EED8C0]
                             px-2 py-1 text-xs text-[#3A211F]
@@ -770,15 +799,14 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                         ) : (
                           filteredCategoryOptions.map((cat) => {
                             // ✅ FIXED: use cat.id instead of cat.category
-                            const isSelected =
-                              formValues.categories.includes(cat.id);
+                            const isSelected = formValues.categories.includes(
+                              cat.id,
+                            );
                             return (
                               <button
                                 key={cat.id}
                                 type="button"
-                                onMouseDown={(e) =>
-                                  e.preventDefault()
-                                }
+                                onMouseDown={(e) => e.preventDefault()}
                                 onClick={() => toggleCategory(cat.id)}
                                 className={`
                                   flex w-full items-center justify-between
@@ -790,9 +818,10 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                                   <span
                                     className={`
                                       inline-flex h-3 w-3 items-center justify-center rounded-[4px] border
-                                      ${isSelected
-                                        ? "border-[#7A1F1F] bg-[#7A1F1F]"
-                                        : "border-[#D9C7A8] bg-white"
+                                      ${
+                                        isSelected
+                                          ? "border-[#7A1F1F] bg-[#7A1F1F]"
+                                          : "border-[#D9C7A8] bg-white"
                                       }
                                     `}
                                   >
@@ -887,9 +916,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                 <div className="relative">
                   <button
                     type="button"
-                    onClick={() =>
-                      setIsProductOpen((prev) => !prev)
-                    }
+                    onClick={() => setIsProductOpen((prev) => !prev)}
                     className="
                       flex w-full items-center justify-between
                       rounded-xl border border-[#EED8C0] bg-white/80
@@ -919,9 +946,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                         <input
                           type="text"
                           value={productSearch}
-                          onChange={(e) =>
-                            setProductSearch(e.target.value)
-                          }
+                          onChange={(e) => setProductSearch(e.target.value)}
                           className="
                             w-full rounded-lg border border-[#EED8C0]
                             px-2 py-1 text-xs text-[#3A211F]
@@ -939,15 +964,14 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                           </p>
                         ) : (
                           filteredProductOptions.map((prod) => {
-                            const isSelected =
-                              formValues.products.includes(prod.id);
+                            const isSelected = formValues.products.includes(
+                              prod.id,
+                            );
                             return (
                               <button
                                 key={prod.id}
                                 type="button"
-                                onMouseDown={(e) =>
-                                  e.preventDefault()
-                                }
+                                onMouseDown={(e) => e.preventDefault()}
                                 onClick={() => toggleProduct(prod.id)}
                                 className="
                                   flex w-full items-center justify-between
@@ -958,9 +982,10 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                                   <span
                                     className={`
                                       inline-flex h-3 w-3 items-center justify-center rounded-[4px] border
-                                      ${isSelected
-                                        ? "border-[#7A1F1F] bg-[#7A1F1F]"
-                                        : "border-[#D9C7A8] bg-white"
+                                      ${
+                                        isSelected
+                                          ? "border-[#7A1F1F] bg-[#7A1F1F]"
+                                          : "border-[#D9C7A8] bg-white"
                                       }
                                     `}
                                   >
@@ -1049,8 +1074,7 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
               {/* Message */}
               <div>
                 <label className="block text-xs font-semibold text-[#6B4B3A] mb-1">
-                  Message / Requirements{" "}
-                  <span className="text-red-500">*</span>
+                  Message / Requirements <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   name="message"
@@ -1112,9 +1136,10 @@ function ContactModalBase({ isOpen, onClose, onSubmit, logoSrc }) {
                       rounded-full text-xs sm:text-sm font-semibold
                       shadow-md hover:shadow-lg
                       transition-all duration-200
-                      ${isSubmitting || !isFormValid
-                        ? "bg-[#F5E1B8] text-[#7A1F1F]/60 cursor-not-allowed"
-                        : "bg-[#EAC97C] text-[#7A1F1F] hover:bg-[#F4D489] hover:-translate-y-0.5"
+                      ${
+                        isSubmitting || !isFormValid
+                          ? "bg-[#F5E1B8] text-[#7A1F1F]/60 cursor-not-allowed"
+                          : "bg-[#EAC97C] text-[#7A1F1F] hover:bg-[#F4D489] hover:-translate-y-0.5"
                       }
                     `}
                   >

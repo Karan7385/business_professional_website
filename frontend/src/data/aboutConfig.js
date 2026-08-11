@@ -36,7 +36,7 @@ export const TEAM_MEMBERS = [
 export const TIMELINE_EVENTS = [
   {
     date: "2014",
-    title: "Founded PT Indo Business Exports",
+    title: "Founded PT ATLAS GLOBAL VENTURES",
     description:
       "Started as a focused trading house connecting trusted farmers and local suppliers of Indian and Indonesian spices to regional buyers.",
   },
@@ -123,7 +123,7 @@ export const CORE_VALUES = [
 
 export const WHY_US_SECTION = {
   id: "why-us",
-  eyebrow: "Why Choose PT Indo Business Exports",
+  eyebrow: "Why Choose PT ATLAS GLOBAL VENTURES",
   title: "Reliable Partner for Indonesia’s Natural Excellence",
 };
 

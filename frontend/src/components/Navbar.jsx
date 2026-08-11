@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useLocation, NavLink } from "react-router-dom";
 import axios from "axios";
 
-import Logo from "../assets/logos/logo.png";
+import Logo from "../assets/logos/logo.jpeg";
 import InstaLogo from "../assets/logos/insta-logo.png";
 import FbLogo from "../assets/logos/fb-logo.png";
 import TwitterLogo from "../assets/logos/twitter-logo.png";
@@ -37,7 +37,7 @@ export default function NavbarA({ openModal, setOpenModal }) {
         if (!modalOpenRef.current) {
           setOpenModal(true);
         }
-      }, 60_000);
+      }, 420_000);
     }, 300_000);
 
     return () => {
@@ -214,13 +214,13 @@ export default function NavbarA({ openModal, setOpenModal }) {
               >
                 <img
                   src={Logo}
-                  className="h-24 w-auto"
-                  alt="PT Indo Business Exports logo"
+                  className="h-16 w-auto p-1 rounded-2xl"
+                  alt="PT ATLAS GLOBAL VENTURES logo"
                   loading="lazy"
                 />
                 <div className="flex flex-col">
-                  <h1 className="sm:text-xl lg:text-3xl font-bold text-[#7A1F1F] leading-tight unbounded-heading">
-                    PT Indo Business Exports
+                  <h1 className="sm:text-xl lg:text-xl font-bold text-[#7A1F1F] leading-tight unbounded-heading">
+                    PT ATLAS GLOBAL VENTURES
                   </h1>
                   <p className="text-xs text-[#7A1F1F] font-medium unbounded-subHeading">
                     SPICES, HERBS, GUM RESINS AND NATURAL ESSENTIAL OILS

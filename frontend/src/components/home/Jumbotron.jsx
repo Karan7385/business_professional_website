@@ -69,7 +69,7 @@ function JumbotronBase(props) {
           {/* GRADIENT MAIN HEADING */}
           <h1
             className="
-              mb-4 text-3xl sm:text-4xl lg:text-5xl
+              mb-4 text-2xl sm:text-4xl lg:text-4xl
               font-medium sanchez-regular tracking-tight
               bg-linear-to-r from-amber-300 via-amber-200 to-yellow-100
               bg-clip-text text-transparent

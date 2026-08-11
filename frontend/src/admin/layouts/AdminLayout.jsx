@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import Logo from "../../assets/logos/logo.png";
+import Logo from "../../assets/logos/logo.jpeg";
 
 // =========================== IMPORT PAGES ============================================
 

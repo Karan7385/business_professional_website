@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LogoSrc from "../assets/logos/logo.png";
+import LogoSrc from "../assets/logos/logo.jpeg";
 
 import InstaLogo from "../assets/logos/insta-logo.png";
 import FbLogo from "../assets/logos/fb-logo.png";
@@ -22,13 +22,13 @@ function Footer() {
               <Link to="/" className="inline-flex items-center gap-4">
                 <img
                   src={LogoSrc}
-                  alt="PT Indo Business Exports"
+                  alt="PT ATLAS GLOBAL VENTURES"
                   className="h-20 sm:h-24 md:h-28 w-auto object-contain"
                 />
               </Link>
 
               <p className="mt-3 text-sm text-[#4b2a2a] max-w-sm sanchez-regular text-justify">
-                PT Indo Business EXPORT — exporters of premium spices, herbs and
+                PT ATLAS GLOBAL VENTURES — exporters of premium spices, herbs and
                 dry fruits. Trusted sourcing, ethical practices and global
                 deliveries.
               </p>
@@ -224,7 +224,7 @@ function Footer() {
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-sm text-[#5b2f2f] text-center md:text-left">
-              © {new Date().getFullYear()} PT Indo Business Exports. All rights
+              © {new Date().getFullYear()} PT ATLAS GLOBAL VENTURES. All rights
               reserved.
             </div>
 
@@ -251,7 +251,7 @@ function Footer() {
                   </a>
                 )
               )} */}
-              <p className="text-2xs">Developed by <b>DevWithKaran</b></p>
+              <p className="text-2xs">Developed by <b>Karan Vishwakarma</b></p>
             </div>
           </div>
 

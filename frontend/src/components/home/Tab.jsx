@@ -48,7 +48,7 @@ function TabBase(props) {
       {/* SECTION HEADING */}
       <header className="mb-6 text-center">
         <h2 className="sanchez-regular text-3xl sm:text-4xl text-[#7A1F1F]">
-          Why Choose PT Indo Business Exports
+          Why Choose PT ATLAS GLOBAL VENTURES
         </h2>
         <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
           Explore our key statistics, services, and frequently asked questions to understand us better

@@ -1,4 +1,4 @@
-import LOGO from '../assets/logos/logo.png';
+import LOGO from '../assets/logos/logo.jpeg';
 
 export default function Loader() {
   return (

@@ -528,7 +528,7 @@ const HomePage = () => {
                     <Label>Title</Label>
                     <TextInput
                       disabled={!isEditingJumbotron}
-                      placeholder="PT Indo Business Exports"
+                      placeholder="PT ATLAS GLOBAL VENTURES"
                       value={jumbotron.title}
                       onChange={(e) =>
                         setJumbotron((prev) => ({
@@ -1054,7 +1054,7 @@ const HomePage = () => {
                           disabled={!isEditingTabs}
                           rows={3}
                           value={f.answer}
-                          placeholder="PT Indo Business Exports specializes in..."
+                          placeholder="PT ATLAS GLOBAL VENTURES specializes in..."
                           onChange={(e) =>
                             setFaqs((prev) =>
                               prev.map((faq) =>

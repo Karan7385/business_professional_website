@@ -3,6 +3,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 import cors from 'cors';
+import axios from 'axios';
+import countries from "world-countries";
 
 // IMPORT ROUTES
 import login_routes from './routes/auth/login_route.js';
@@ -33,6 +35,33 @@ app.use('/api/products', products_routes);
 app.use('/api/contact', contact_routes);
 app.use('/api/logs', logs_routes);
 app.use('/api/preferences', preference_routes);
+app.get("/api/country-code", (req, res) => {
+  try {
+    // Since the data is local, we map over it synchronously without any network fetch
+    const formattedCountries = countries.map((country) => {
+      const root = country.idd?.root || "";
+      const suffixes = country.idd?.suffixes || [""];
+      const callingCode = suffixes.length === 1 ? `${root}${suffixes[0]}` : root;
+
+      return {
+        name: country.name?.common || "Unknown",
+        code: country.cca2 || "",
+        callingCode: callingCode // Outputs standard clean dial strings like "+91"
+      };
+    });
+
+    // Sort alphabetically by country name
+    formattedCountries.sort((a, b) => a.name.localeCompare(b.name));
+
+    return res.json(formattedCountries);
+
+  } catch (error) {
+    console.error("Local processing error:", error.message);
+    return res.status(500).json({ error: "Failed to load country codes" });
+  }
+});
+
+
 
 // START THE SERVER
 app.listen(PORT, () => {

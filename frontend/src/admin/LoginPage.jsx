@@ -1,4 +1,4 @@
-import Logo from "../assets/logos/logo.png";
+import Logo from "../assets/logos/logo.jpeg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -84,7 +84,7 @@ export default function LoginPage() {
             </div>
             <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 text-center">
               <span className="bg-clip-text text-transparent bg-linear-to-r from-[#7a1d1d] via-[#c43535] to-[#fd3d3d]">
-                PT INDO Admin
+                PT ATLAS Admin
               </span>
             </h1>
             <p className="text-xs text-gray-500 mt-1">
